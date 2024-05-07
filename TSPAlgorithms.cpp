@@ -51,8 +51,7 @@ void TSPAlgorithms::loadGraphVertexes() {
         newFile.open(filename);
 
         int pos1 = graphName.find('_');
-        int pos2 = graphName.find('.');
-        int maxVertexNumber = stoi(graphName.substr(pos1 + 1, pos2 - pos1 - 1));
+        int maxVertexNumber = stoi(graphName.substr(pos1 + 1, graphName.size() - pos1 - 1));
         int vertexNumber = 0;
 
         if (newFile.fail()) {
@@ -120,6 +119,10 @@ void TSPAlgorithms::loadGraphEdges() {
             }
 
             getline(newFile,line);
+
+            if(line == ""){
+                continue;
+            }
 
             istringstream ss(line);
 

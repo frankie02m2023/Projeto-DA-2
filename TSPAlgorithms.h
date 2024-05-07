@@ -11,10 +11,10 @@ private:
     string graphName;
     void loadGraphVertexes();
     void loadGraphEdges();
-    void loadGraph();
 public:
     TSPAlgorithms(const string& graphName);
     string getGraphName() const;
     Graph<Node> getGraph() const;
     void setGraphName(const string& graphName);
+    void loadGraph();
 };
