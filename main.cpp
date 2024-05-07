@@ -4,12 +4,15 @@
 
 #include "TSPAlgorithms.h"
  int main(){
-    TSPAlgorithms tspAlgorithm = TSPAlgorithms("shipping");
+    TSPAlgorithms tspAlgorithm = TSPAlgorithms("tourism");
     tspAlgorithm.loadGraph();
-    for(Vertex<Node>* vertex : tspAlgorithm.getGraph().getVertexSet()){
-        for(Edge<Node>* edge : vertex->getAdj()){
-            cout << vertex->getInfo().getID() << " -> " << edge->getDest()->getInfo().getID() << "  " << edge->getWeight() << endl;
-        }
+    stack<Node> minPath;
+    double minPathDistance = tspAlgorithm.getMinDistWithBackTracking(minPath);
+    cout << minPathDistance << endl;
+    while(!minPath.empty()){
+        cout << minPath.top().getID() << " -> ";
+        minPath.pop();
     }
+    cout << endl;
     return 0;
 }

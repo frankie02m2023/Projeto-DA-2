@@ -152,6 +152,7 @@ void TSPAlgorithms::loadGraphEdges() {
             Node destinationNode = Node(idDestination);
 
             graph.addEdge(sourceNode,destinationNode,distance);
+            graph.addEdge(destinationNode, sourceNode, distance);
 
             if(graphName == "tourism"){
                 Vertex<Node>* sourceVertex = graph.findVertex(sourceNode);
@@ -166,4 +167,61 @@ void TSPAlgorithms::loadGraphEdges() {
 void TSPAlgorithms::loadGraph() {
     loadGraphVertexes();
     loadGraphEdges();
+}
+
+void TSPAlgorithms::setAllVertexesAsUnvisited() {
+    for(Vertex<Node>* vertex : graph.getVertexSet()){
+        vertex->setVisited(false);
+    }
+}
+
+void TSPAlgorithms::setAllVertexPathsNull(){
+    for(Vertex<Node>* vertex : graph.getVertexSet()){
+        vertex->setPath(nullptr);
+    }
+}
+
+void TSPAlgorithms::DFSBacktracking(Vertex<Node>* vertex, double& distance, double &minDistance, stack<Node>& path,stack<Node>& minDistancePath) {
+    if(path.size() == graph.getVertexSet().size()){
+        double auxDistance;
+        for(Edge<Node>* edge : vertex->getAdj()){
+            if(edge->getDest()->getInfo().getID() == 0){
+                distance+=edge->getWeight();
+                auxDistance = edge->getWeight();
+                Node node = Node(0);
+                path.push(node);
+            }
+        }
+        if(distance < minDistance){
+            minDistance = distance;
+            minDistancePath = path;
+        }
+        distance-=auxDistance;
+        path.pop();
+        return;
+    }
+    for(Edge<Node>* edge : vertex->getAdj()){
+        if(!edge->getDest()->isVisited()){
+            vertex->setVisited(true);
+            path.push(edge->getDest()->getInfo());
+            distance+=edge->getWeight();
+            DFSBacktracking(edge->getDest(), distance, minDistance, path, minDistancePath);
+            vertex->setVisited(false);
+            distance-=edge->getWeight();
+            path.pop();
+        }
+    }
+}
+
+double TSPAlgorithms::getMinDistWithBackTracking(stack<Node> &minDistancePath) {
+    setAllVertexesAsUnvisited();
+    setAllVertexPathsNull();
+    Node initialNode = Node(0);
+    Vertex<Node>* initialVertex = graph.findVertex(initialNode);
+    double minDistance = INT_MAX;
+    double distance = 0;
+    stack<Node> path;
+    path.push(initialNode);
+    DFSBacktracking(initialVertex,distance,minDistance,path,minDistancePath);
+    return minDistance;
 }
