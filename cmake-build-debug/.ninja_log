@@ -1,0 +1,7 @@
+# ninja log v5
+12	172	7368038945681515	CMakeFiles/Projeto-DA.dir/main.cpp.obj	8c0715ef7a9f9e21
+9	294	7368039579514848	CMakeFiles/Projeto-DA.dir/Node.cpp.obj	535404dfc7958118
+11	280	7368117850177315	CMakeFiles/Projeto-DA.dir/Location.cpp.obj	ca039e1ff3a68881
+5	527	7368117852666108	CMakeFiles/Projeto-DA.dir/Node.cpp.obj	535404dfc7958118
+16	994	7368117857339888	CMakeFiles/Projeto-DA.dir/TSPAlgorithms.cpp.obj	ef3b9e302b96db07
+995	1304	7368117860378230	Projeto-DA.exe	215a574ec58feea4
