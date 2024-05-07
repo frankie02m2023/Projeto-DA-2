@@ -4,6 +4,7 @@
 
 #include "graph.h"
 #include "Node.h"
+#include <stack>
 
 class TSPAlgorithms{
 private:
@@ -11,10 +12,14 @@ private:
     string graphName;
     void loadGraphVertexes();
     void loadGraphEdges();
+    void setAllVertexesAsUnvisited();
+    void setAllVertexPathsNull();
+    void DFSBacktracking(Vertex<Node>* vertex, double& distance, double &minDistance, stack<Node>& path, stack<Node>& minDistPath);
 public:
     TSPAlgorithms(const string& graphName);
     string getGraphName() const;
     Graph<Node> getGraph() const;
     void setGraphName(const string& graphName);
     void loadGraph();
+    double getMinDistWithBackTracking(stack<Node>& minDistPath);
 };
