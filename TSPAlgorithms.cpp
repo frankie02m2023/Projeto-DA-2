@@ -24,7 +24,7 @@ void TSPAlgorithms::setGraphName(const string &graphName) {
 
 void TSPAlgorithms::loadGraphVertexes() {
     string filename;
-    if(graphName == "shipping" || graphName == "stadium" || graphName == "tourism"){
+    if(graphName == "shipping" || graphName == "stadiums" || graphName == "tourism"){
         int numberOfVertexes;
         if(graphName == "shipping"){
             numberOfVertexes = 14;

@@ -4,7 +4,7 @@
 
 #include "TSPAlgorithms.h"
  int main(){
-    TSPAlgorithms tspAlgorithm = TSPAlgorithms("edges_500");
+    TSPAlgorithms tspAlgorithm = TSPAlgorithms("shipping");
     tspAlgorithm.loadGraph();
     for(Vertex<Node>* vertex : tspAlgorithm.getGraph().getVertexSet()){
         for(Edge<Node>* edge : vertex->getAdj()){
