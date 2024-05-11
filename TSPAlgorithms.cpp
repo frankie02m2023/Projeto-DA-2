@@ -184,15 +184,18 @@ void TSPAlgorithms::setAllVertexPathsNull(){
 void TSPAlgorithms::DFSBacktracking(Vertex<Node>* vertex, double& distance, double &minDistance, stack<Node>& path,stack<Node>& minDistancePath) {
     if(path.size() == graph.getVertexSet().size()){
         double auxDistance;
+        bool found_zero = false;
         for(Edge<Node>* edge : vertex->getAdj()){
             if(edge->getDest()->getInfo().getID() == 0){
                 distance+=edge->getWeight();
                 auxDistance = edge->getWeight();
                 Node node = Node(0);
                 path.push(node);
+                found_zero = true;
+                break;
             }
         }
-        if(distance < minDistance){
+        if(distance < minDistance && found_zero){
             minDistance = distance;
             minDistancePath = path;
         }
