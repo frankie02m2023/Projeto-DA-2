@@ -23,6 +23,10 @@ void TSPAlgorithms::setGraphName(const string &graphName) {
     this->graphName = graphName;
 }
 
+bool TSPAlgorithms::isGraphFullyConnected() const {
+    return graphIsFullyConnected;
+}
+
 void TSPAlgorithms::loadGraphVertexes() {
     string filename;
     if(graphName == "shipping" || graphName == "stadiums" || graphName == "tourism"){
@@ -93,7 +97,7 @@ void TSPAlgorithms::loadGraphVertexes() {
     }
 }
 
-void TSPAlgorithms::loadGraphEdges() {
+void TSPAlgorithms::loadGraphEdges(unsigned int& numberOfGraphEdges) {
     if(graphName != "graph1" && graphName != "graph2" && graphName != "graph3"){
         string filename = graphName + ".csv";
 
@@ -152,6 +156,7 @@ void TSPAlgorithms::loadGraphEdges() {
             Node sourceNode = Node(idSource);
             Node destinationNode = Node(idDestination);
 
+            numberOfGraphEdges+=2;
             graph.addEdge(sourceNode,destinationNode,distance);
             graph.addEdge(destinationNode, sourceNode, distance);
 
@@ -166,8 +171,17 @@ void TSPAlgorithms::loadGraphEdges() {
 }
 
 void TSPAlgorithms::loadGraph() {
+    unsigned int numberOfVertexes, numberOfEdges;
     loadGraphVertexes();
-    loadGraphEdges();
+    numberOfVertexes = graph.getVertexSet().size();
+    numberOfEdges = 0;
+    loadGraphEdges(numberOfEdges);
+    if(numberOfEdges == (numberOfVertexes * (numberOfVertexes - 1))){
+        graphIsFullyConnected = true;
+    }
+    else{
+        graphIsFullyConnected = false;
+    }
 }
 
 void TSPAlgorithms::setAllVertexesAsUnvisited() {

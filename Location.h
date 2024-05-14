@@ -1,6 +1,7 @@
 //
 // Created by franc on 07/05/2024.
 //
+#include <cmath>
 class Location{
 private:
     double x;
@@ -13,5 +14,7 @@ public:
     void setX(const double& x);
     void setY(const double& y);
     void operator=(const Location& location);
+    double getXInRadians() const;
+    double getYInRadians() const;
     double getHaversineDistance(const Location& location);
 };
