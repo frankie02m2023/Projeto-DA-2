@@ -4,15 +4,16 @@
 
 #include "TSPAlgorithms.h"
  int main(){
-    TSPAlgorithms tspAlgorithm = TSPAlgorithms("tourism");
+    TSPAlgorithms tspAlgorithm = TSPAlgorithms("stadiums");
     tspAlgorithm.loadGraph();
-    stack<Node> minPath;
-    double minPathDistance = tspAlgorithm.getMinDistWithBackTracking(minPath);
-    cout << minPathDistance << endl;
-    while(!minPath.empty()){
-        cout << minPath.top().getID() << " -> ";
-        minPath.pop();
+    stack<Node> minPathStack;
+    vector<Node> minPathVector;
+    double minPathDistance1 = tspAlgorithm.getMinDistWithTriangularInequity(minPathVector);
+    for(Node node : minPathVector){
+        cout << node.getID() << " -> ";
     }
+    cout << endl;
+    cout << minPathDistance1 << endl;
     cout << endl;
     return 0;
 }

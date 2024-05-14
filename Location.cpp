@@ -29,3 +29,8 @@ double Location::getHaversineDistance(const Location &location) {
     //to be completed
     return 0;
 }
+
+void Location::operator=(const Location &location) {
+    x = location.x;
+    y = location.y;
+}
