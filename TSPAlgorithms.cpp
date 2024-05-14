@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "TSPAlgorithms.h"
+#include "MutablePriorityQueue.h"
 
 Graph<Node> TSPAlgorithms::getGraph() const {
     return graph;
@@ -228,3 +229,90 @@ double TSPAlgorithms::getMinDistWithBackTracking(stack<Node> &minDistancePath) {
     DFSBacktracking(initialVertex,distance,minDistance,path,minDistancePath);
     return minDistance;
 }
+
+Vertex<Node> *TSPAlgorithms::findMinDistVertex(vector<Vertex<Node> *> vertexes) {
+    double minDist = INT_MAX;
+    Vertex<Node>* minDistVertex = nullptr;
+    for(Vertex<Node>* vertex : vertexes){
+        if(!vertex->isVisited() && vertex->getDist() < minDist){
+            minDist = vertex->getDist();
+            minDistVertex = vertex;
+        }
+    }
+    return minDistVertex;
+}
+
+void TSPAlgorithms::primAlgorithm(Vertex<Node>* root) {
+    vector<Vertex<Node>*> vertexes;
+    unsigned int numberOfVertexesInTree = 1;
+
+
+    for(Edge<Node>* edge : root->getAdj()){
+        edge->getDest()->setDist(edge->getWeight());
+        edge->getDest()->setPath(edge);
+        vertexes.push_back(edge->getDest());
+    }
+
+    root->setVisited(true);
+
+    while(numberOfVertexesInTree < graph.getVertexSet().size()){
+        Vertex<Node>* minDistVertex = findMinDistVertex(vertexes);
+        numberOfVertexesInTree++;
+        minDistVertex->setVisited(true);
+        for(Edge<Node>* edge : minDistVertex->getAdj()){
+            if(!edge->getDest()->isVisited() && edge->getDest()->getDist() > edge->getWeight()){
+                edge->getDest()->setDist(edge->getWeight());
+                edge->getDest()->setPath(edge);
+            }
+        }
+    }
+}
+
+void TSPAlgorithms::MSTPreOrderVisitDFS(Vertex<Node> *root, vector<Vertex<Node>*> &minDistancePath) {
+    for(Edge<Node>* edge : root->getAdj()){
+        if(edge->getDest()->getPath() == edge && !edge->getDest()->isVisited()){
+            minDistancePath.push_back(edge->getDest());
+            edge->getDest()->setVisited(true);
+            MSTPreOrderVisitDFS(edge->getDest(),minDistancePath);
+        }
+    }
+}
+
+double TSPAlgorithms::getMinDistWithTriangularInequity(vector<Node> &minDistPath) {
+    for(Vertex<Node>* vertex : graph.getVertexSet()){
+        vertex->setVisited(false);
+        vertex->setPath(nullptr);
+    }
+    Node rootNode = Node(0);
+    Vertex<Node>* root = graph.findVertex(rootNode);
+    primAlgorithm(root);
+    for(Vertex<Node>* vertex : graph.getVertexSet()){
+        if(vertex->getInfo().getID() != 0){
+            vertex->setVisited(false);
+        }
+    }
+    double minDistance = 0;
+    vector<Vertex<Node>*> minDistPathVertexes;
+    minDistPathVertexes.push_back(root);
+    MSTPreOrderVisitDFS(root,minDistPathVertexes);
+    minDistPathVertexes.push_back(root);
+    for(int i = 0; i < minDistPathVertexes.size() - 1; i++){
+        minDistPath.push_back(minDistPathVertexes[i]->getInfo());
+        for(Edge<Node>* edge : minDistPathVertexes[i]->getAdj()){
+            if(edge->getDest()->getInfo() == minDistPathVertexes[i + 1]->getInfo()){
+                minDistance+=edge->getWeight();
+                break;
+            }
+        }
+    }
+    minDistPath.push_back(rootNode);
+    for(Edge<Node>* edge : root->getAdj()){
+        if(edge->getDest()->getInfo() == minDistPathVertexes[minDistPathVertexes.size() - 1]->getInfo()){
+            minDistance+=edge->getWeight();
+            break;
+        }
+    }
+    return minDistance;
+}
+
+

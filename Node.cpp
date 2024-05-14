@@ -48,5 +48,23 @@ void Node::setName(string name) {
     this->name = name;
 }
 
+bool Node::operator<(const Node &node) const {
+    return id < node.id;
+}
+
+bool Node::operator>(const Node &node) const {
+    return id > node.id;
+}
+
+bool Node::operator!=(const Node &node) const {
+    return id != node.id;
+}
+
+void Node::operator=(const Node &node) {
+    id = node.id;
+    name = node.name;
+    location = node.location;
+}
+
 
 

@@ -12,5 +12,6 @@ public:
     double getY() const;
     void setX(const double& x);
     void setY(const double& y);
+    void operator=(const Location& location);
     double getHaversineDistance(const Location& location);
 };

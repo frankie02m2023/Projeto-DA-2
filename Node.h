@@ -24,7 +24,14 @@ public:
     string getName() const;
     Location getLocation() const;
     void setName(string name);
+    void operator=(const Node& node);
+    bool operator()(const Node& node) const;
     bool operator==(const Node& node) const;
+    bool operator<(const Node& node) const;
+    bool operator<=(const Node& node) const;
+    bool operator>(const Node& node) const;
+    bool operator>=(const Node& node) const;
+    bool operator!=(const Node& node) const;
 };
 
 #endif //DA2324_P03_STUDENT_NODE_H
