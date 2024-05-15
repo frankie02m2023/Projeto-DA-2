@@ -218,42 +218,27 @@ void Menu::mediumGraphs() {
 }
 
 void Menu::handleMediumGraphs(int choice) {
+    vector<string> edgeFiles = {
+            "edges_25", "edges_50", "edges_75", "edges_100",
+            "edges_200", "edges_300", "edges_400", "edges_500",
+            "edges_600", "edges_700", "edges_800", "edges_900"
+    };
+
     while (true) {
-        switch (choice) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                graphMenu();
-                break;
-            case 14:
-                cout << "Exiting..." << endl;
-                return;
-            default:
-                cout << "Invalid choice. Please enter a valid option." << endl;
+        cout << "Please enter your choice: ";
+        cin >> choice;
+
+        if (choice >= 1 && choice <= 12) {
+            TSPAlgorithms tspAlgorithm(edgeFiles[choice - 1]);
+            tspAlgorithm.loadGraph();
+        } else if (choice == 13) {
+            graphMenu();
+        } else if (choice == 14) {
+            cout << "Exiting..." << endl;
+            return;
+        } else {
+            cout << "Invalid choice. Please enter a valid option." << endl;
         }
-        break;
     }
 }
 
