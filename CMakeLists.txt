@@ -17,6 +17,8 @@ add_executable(Projeto-DA
         TSPAlgorithms.h
         TSPAlgorithms.cpp
         MutablePriorityQueue.h
+        Menu.h
+        Menu.cpp
 )
 
 file(COPY Datasets/ToyGraphs/tourism.csv Datasets/ToyGraphs/stadiums.csv Datasets/ToyGraphs/shipping.csv  DESTINATION ${CMAKE_BINARY_DIR})
