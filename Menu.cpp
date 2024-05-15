@@ -3,11 +3,8 @@
 //
 
 #include <iostream>
-#include "Menu.h"
-
-using namespace std;
-
-#include <iostream>
+#include <vector>
+#include <string>
 #include "Menu.h"
 
 using namespace std;
@@ -19,7 +16,7 @@ void Menu::graphMenu() {
     while (true) {
         cout << "\n******************************  Travelling Salesperson Problem  *******************************\n";
 
-        cout << "*** Select the number of the option that corresponds to the type of graph you wish to load: ***"<< '\n';
+        cout << "*** Select the number of the option that corresponds to the type of graph you wish to load: ***" << '\n';
 
         cout << "****** 1.";
         cout << " Toy Graphs                                                                     ";
@@ -67,7 +64,6 @@ void Menu::handleGraphMenu(int choice) {
             default:
                 cout << "Invalid choice. Please enter a valid option." << endl;
         }
-
     }
 }
 
@@ -114,6 +110,7 @@ void Menu::handleToyGraphs(int choice) {
                     string GraphName1 = "shipping";
                     TSPAlgorithms tspAlgorithm1(GraphName1);
                     tspAlgorithm1.loadGraph();
+                    algorithmMenu(tspAlgorithm1);
                 }
                 break;
             case 2:
@@ -122,6 +119,7 @@ void Menu::handleToyGraphs(int choice) {
                     string GraphName2 = "stadiums";
                     TSPAlgorithms tspAlgorithm2(GraphName2);
                     tspAlgorithm2.loadGraph();
+                    algorithmMenu(tspAlgorithm2);
                 }
                 break;
             case 3:
@@ -130,6 +128,7 @@ void Menu::handleToyGraphs(int choice) {
                     string GraphName3 = "tourism";
                     TSPAlgorithms tspAlgorithm3(GraphName3);
                     tspAlgorithm3.loadGraph();
+                    algorithmMenu(tspAlgorithm3);
                 }
                 break;
             case 4:
@@ -144,8 +143,6 @@ void Menu::handleToyGraphs(int choice) {
         break;
     }
 }
-
-
 
 void Menu::mediumGraphs() {
     int choice = 0;
@@ -225,14 +222,15 @@ void Menu::handleMediumGraphs(int choice) {
     };
 
     while (true) {
-        cout << "Please enter your choice: ";
-        cin >> choice;
-
         if (choice >= 1 && choice <= 12) {
+            cout << "Loading the selected Medium Graph..." << endl;
             TSPAlgorithms tspAlgorithm(edgeFiles[choice - 1]);
             tspAlgorithm.loadGraph();
+            algorithmMenu(tspAlgorithm);
+            break;
         } else if (choice == 13) {
             graphMenu();
+            break;
         } else if (choice == 14) {
             cout << "Exiting..." << endl;
             return;
@@ -280,10 +278,31 @@ void Menu::handleRealWorldGraphs(int choice) {
     while (true) {
         switch (choice) {
             case 1:
+            {
+                cout << "Loading Real World Graph 1..." << endl;
+                string GraphName1 = "real1";
+                TSPAlgorithms tspAlgorithm1(GraphName1);
+                tspAlgorithm1.loadGraph();
+                algorithmMenu(tspAlgorithm1);
+            }
                 break;
             case 2:
+            {
+                cout << "Loading Real World Graph 2..." << endl;
+                string GraphName2 = "real2";
+                TSPAlgorithms tspAlgorithm2(GraphName2);
+                tspAlgorithm2.loadGraph();
+                algorithmMenu(tspAlgorithm2);
+            }
                 break;
             case 3:
+            {
+                cout << "Loading Real World Graph 3..." << endl;
+                string GraphName3 = "real3";
+                TSPAlgorithms tspAlgorithm3(GraphName3);
+                tspAlgorithm3.loadGraph();
+                algorithmMenu(tspAlgorithm3);
+            }
                 break;
             case 4:
                 graphMenu();
@@ -298,7 +317,7 @@ void Menu::handleRealWorldGraphs(int choice) {
     }
 }
 
-void Menu::algorithmMenu() {
+void Menu::algorithmMenu(TSPAlgorithms tspAlgorithm) {
     int choice = 0;
     while (true) {
         cout << "\n**********************  Travelling Salesperson Problem  **********************\n";
@@ -327,25 +346,25 @@ void Menu::algorithmMenu() {
         cout << "\nEnter your choice: ";
         cin >> choice;
         if (choice == 5) { break; }
-        handleAlgorithmMenu(choice);
+        handleAlgorithmMenu(choice, tspAlgorithm);
         break;
     }
 }
-void Menu::handleAlgorithmMenu(int choice) {
-    while (true) {
-        graphMenu();
-        cout << "Enter your choice: ";
-        cin >> choice;
 
+void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
+    while (true) {
         switch (choice) {
             case 1:
                 cout << "Solving TSP with Backtracking..." << endl;
+                // tspAlgorithm.solveWithBacktracking();
                 break;
             case 2:
                 cout << "Solving TSP with Triangular Inequality..." << endl;
+                // tspAlgorithm.solveWithTriangularInequality();
                 break;
             case 3:
                 cout << "Solving TSP with our Algorithm..." << endl;
+                // tspAlgorithm.solveWithCustomAlgorithm();
                 break;
             case 4:
                 cout << "Going back to Graph Selection..." << endl;

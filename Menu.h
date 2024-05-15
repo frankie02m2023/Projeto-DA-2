@@ -11,9 +11,9 @@ class Menu {
     public:
         Menu();
         void graphMenu();
-        void algorithmMenu();
+        void algorithmMenu(TSPAlgorithms tspAlgorithm);
         void handleGraphMenu(int choice);
-        void handleAlgorithmMenu(int choice);
+        void handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm);
         void toyGraphs();
         void realWorldGraphs();
         void mediumGraphs();
