@@ -260,11 +260,16 @@ void TSPAlgorithms::primAlgorithm(Vertex<Node>* root) {
     vector<Vertex<Node>*> vertexes;
     unsigned int numberOfVertexesInTree = 1;
 
+    for(Vertex<Node>* vertex :graph.getVertexSet()){
+        vertex->setDist(INT_MAX);
+        vertex->setPath(nullptr);
+        vertexes.push_back(vertex);
+    }
+
 
     for(Edge<Node>* edge : root->getAdj()){
         edge->getDest()->setDist(edge->getWeight());
         edge->getDest()->setPath(edge);
-        vertexes.push_back(edge->getDest());
     }
 
     root->setVisited(true);
