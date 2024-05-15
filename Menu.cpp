@@ -60,7 +60,7 @@ void Menu::handleGraphMenu(int choice) {
                 break;
             case 4:
                 cout << "Exiting..." << endl;
-                return;
+                break;
             default:
                 cout << "Invalid choice. Please enter a valid option." << endl;
         }
@@ -136,7 +136,7 @@ void Menu::handleToyGraphs(int choice) {
                 break;
             case 5:
                 cout << "Exiting..." << endl;
-                return;
+                break;
             default:
                 cout << "Invalid choice. Please enter a valid option." << endl;
         }
@@ -233,7 +233,7 @@ void Menu::handleMediumGraphs(int choice) {
             break;
         } else if (choice == 14) {
             cout << "Exiting..." << endl;
-            return;
+            break;
         } else {
             cout << "Invalid choice. Please enter a valid option." << endl;
         }
@@ -309,7 +309,7 @@ void Menu::handleRealWorldGraphs(int choice) {
                 break;
             case 5:
                 cout << "Exiting..." << endl;
-                return;
+                break;
             default:
                 cout << "Invalid choice. Please enter a valid option." << endl;
         }
@@ -354,27 +354,34 @@ void Menu::algorithmMenu(TSPAlgorithms tspAlgorithm) {
 void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
     while (true) {
         switch (choice) {
-            case 1:
-                cout << "Solving TSP with Backtracking..." << endl;
-                // tspAlgorithm.solveWithBacktracking();
+            case 1: {
+                stack<Node> minPath;
+                double minPathDistance = tspAlgorithm.getMinDistWithBackTracking(minPath);
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
+                while (!minPath.empty()) {
+                    cout << minPath.top().getID() << " -> ";
+                    minPath.pop();
+                }
+                cout << "END" << endl;
                 break;
+            }
             case 2:
                 cout << "Solving TSP with Triangular Inequality..." << endl;
-                // tspAlgorithm.solveWithTriangularInequality();
+
                 break;
             case 3:
                 cout << "Solving TSP with our Algorithm..." << endl;
-                // tspAlgorithm.solveWithCustomAlgorithm();
+
                 break;
             case 4:
                 cout << "Going back to Graph Selection..." << endl;
-                graphMenu();
                 return;
             case 5:
                 cout << "Exiting..." << endl;
-                return;
+                exit(0);  // Exit the program
             default:
                 cout << "Invalid choice. Please enter a valid option." << endl;
         }
+        algorithmMenu(tspAlgorithm);
     }
 }
