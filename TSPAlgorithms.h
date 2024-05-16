@@ -15,6 +15,7 @@ private:
     void loadGraphEdges(unsigned int& numberOfGraphEdges);
     void setAllVertexesAsUnvisited();
     void setAllVertexPathsNull();
+    void resetGraph();
     void DFSBacktracking(Vertex<Node>* vertex, double& distance, double &minDistance, stack<Node>& path, stack<Node>& minDistPath);
     Vertex<Node>* findMinDistVertex(vector<Vertex<Node>*> vertexes);
     void primAlgorithm(Vertex<Node>* root);
@@ -26,7 +27,10 @@ private:
     bool edgeBetweenVertexes(Vertex<Node>* v1, Vertex<Node>* v2);
     void findPerfectMatching(Graph<Node>& mstGraph,vector<Vertex<Node>*> vertex);
     void setReverseEdgeAsTraversed(Edge<Node>* edge);
-    void eulerPathDFS(Vertex<Node>* vertex, vector<Vertex<Node>*>& eulerPath);
+    void setReverseEdgeAsUnTraversed(Edge<Node>* edge);
+    bool edgeIsBridge(Edge<Node>* edge, Graph<Node> &mstGraph);
+    void dfsEdgeIsBridge(Vertex<Node>* vertex, unsigned int& numberOfReachableEdges);
+    void eulerPathDFS(Vertex<Node>* vertex, vector<Vertex<Node>*>& eulerPath, Graph<Node> &mstGraph);
     vector<Vertex<Node>*> findEulerPath(Graph<Node>& mstGraph);
     vector<Vertex<Node>*> buildHamiltonianPath(vector<Vertex<Node>*> eulerPath);
 public:
