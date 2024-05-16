@@ -23,3 +23,4 @@ add_executable(Projeto-DA
 
 file(COPY Datasets/ToyGraphs/tourism.csv Datasets/ToyGraphs/stadiums.csv Datasets/ToyGraphs/shipping.csv  DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY DataSets/MediumGraphs/nodes.csv Datasets/MediumGraphs/edges_25.csv Datasets/MediumGraphs/edges_50.csv Datasets/MediumGraphs/edges_75.csv Datasets/MediumGraphs/edges_100.csv Datasets/MediumGraphs/edges_200.csv Datasets/MediumGraphs/edges_300.csv Datasets/MediumGraphs/edges_400.csv Datasets/MediumGraphs/edges_500.csv Datasets/MediumGraphs/edges_600.csv Datasets/MediumGraphs/edges_700.csv Datasets/MediumGraphs/edges_800.csv Datasets/MediumGraphs/edges_900.csv DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY Datasets/RealWorldGraphs/Graph1 Datasets/RealWorldGraphs/Graph2 Datasets/RealWorldGraphs/Graph3  DESTINATION ${CMAKE_BINARY_DIR})

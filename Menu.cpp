@@ -280,7 +280,7 @@ void Menu::handleRealWorldGraphs(int choice) {
             case 1:
             {
                 cout << "Loading Real World Graph 1..." << endl;
-                string GraphName1 = "real1";
+                string GraphName1 = "Graph1";
                 TSPAlgorithms tspAlgorithm1(GraphName1);
                 tspAlgorithm1.loadGraph();
                 algorithmMenu(tspAlgorithm1);
@@ -289,7 +289,7 @@ void Menu::handleRealWorldGraphs(int choice) {
             case 2:
             {
                 cout << "Loading Real World Graph 2..." << endl;
-                string GraphName2 = "real2";
+                string GraphName2 = "Graph2";
                 TSPAlgorithms tspAlgorithm2(GraphName2);
                 tspAlgorithm2.loadGraph();
                 algorithmMenu(tspAlgorithm2);
@@ -298,7 +298,7 @@ void Menu::handleRealWorldGraphs(int choice) {
             case 3:
             {
                 cout << "Loading Real World Graph 3..." << endl;
-                string GraphName3 = "real3";
+                string GraphName3 = "Graph3";
                 TSPAlgorithms tspAlgorithm3(GraphName3);
                 tspAlgorithm3.loadGraph();
                 algorithmMenu(tspAlgorithm3);
@@ -365,14 +365,28 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 cout << "END" << endl;
                 break;
             }
-            case 2:
-                cout << "Solving TSP with Triangular Inequality..." << endl;
-
+            case 2: {
+                vector<Node> minPath;
+                double minPathDistance = tspAlgorithm.getMinDistWithTriangularInequality(minPath);
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
+                for(Node node : minPath){
+                    cout << node.getID() << " -> ";
+                }
+                cout << endl;
+                cout << "END" << endl;
                 break;
-            case 3:
-                cout << "Solving TSP with our Algorithm..." << endl;
-
+            }
+            case 3: {
+                vector<Node> minPath;
+                double minPathDistance = tspAlgorithm.getMinDistWithChristofidesAlgorithm(minPath);
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
+                for(Node node : minPath){
+                    cout << node.getID() << " -> ";
+                }
+                cout << endl;
+                cout << "END" << endl;
                 break;
+            }
             case 4:
                 cout << "Going back to Graph Selection..." << endl;
                 return;

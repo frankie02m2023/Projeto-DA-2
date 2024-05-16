@@ -19,7 +19,16 @@ private:
     Vertex<Node>* findMinDistVertex(vector<Vertex<Node>*> vertexes);
     void primAlgorithm(Vertex<Node>* root);
     void MSTPreOrderVisitDFS(Vertex<Node>* root, vector<Vertex<Node>*>& minDistancePath);
-    void makeGraphFullyConnected();
+    double getNearestNeighbourDist(Vertex<Node>* vertex);
+    double findOrCalculateDistanceBetweenVertexes(Vertex<Node>* v1, Vertex<Node>* v2);
+    void primAlgorithmChristofides(Graph<Node>& mstGraph, Vertex<Node>* vertex);
+    vector<Vertex<Node>*> getOddDegrees(Graph<Node> mstGraph);
+    bool edgeBetweenVertexes(Vertex<Node>* v1, Vertex<Node>* v2);
+    void findPerfectMatching(Graph<Node>& mstGraph,vector<Vertex<Node>*> vertex);
+    void setReverseEdgeAsTraversed(Edge<Node>* edge);
+    void eulerPathDFS(Vertex<Node>* vertex, vector<Vertex<Node>*>& eulerPath);
+    vector<Vertex<Node>*> findEulerPath(Graph<Node>& mstGraph);
+    vector<Vertex<Node>*> buildHamiltonianPath(vector<Vertex<Node>*> eulerPath);
 public:
     TSPAlgorithms(const string& graphName);
     string getGraphName() const;
@@ -28,5 +37,7 @@ public:
     void setGraphName(const string& graphName);
     void loadGraph();
     double getMinDistWithBackTracking(stack<Node>& minDistPath);
-    double getMinDistWithTriangularInequity(vector<Node>& minDistPath);
+    double getMinDistWithTriangularInequality(vector<Node>& minDistPath);
+    double getMinDistWithNearestNeighbourAnd2opt(vector<Node>& minDistPath);
+    double getMinDistWithChristofidesAlgorithm(vector<Node>& minDistPath);
 };

@@ -15,6 +15,8 @@ public:
     void setX(const double& x);
     void setY(const double& y);
     void operator=(const Location& location);
+    bool operator==(const Location& location) const;
+    bool operator!=(const Location& location) const;
     double getXInRadians() const;
     double getYInRadians() const;
     double getHaversineDistance(const Location& location);
