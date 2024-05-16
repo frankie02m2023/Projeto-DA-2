@@ -7,13 +7,13 @@
 Node::Node(int id){
     this->id = id;
     this->name = "";
-    this->location = Location(-1,-1);
+    this->location = Location(INT_MIN,INT_MIN);
 }
 
 Node::Node(int id, string name) {
     this->id = id;
     this->name = name;
-    this->location = Location(-1,-1);
+    this->location = Location(INT_MIN,INT_MIN);
 }
 
 Node::Node(int id, Location location) {

@@ -67,13 +67,16 @@ class Edge {
         Vertex<T> * getOrig() const;
         Edge<T> *getReverse() const;
         double getFlow() const;
+        bool isTraversed() const;
 
         void setSelected(bool selected);
         void setReverse(Edge<T> *reverse);
         void setFlow(double flow);
         void setWeight(double weight);
+        void setTraversed(bool traversed);
 
-        protected:
+
+protected:
         Vertex<T> * dest; // destination vertex
         double weight; // edge weight, can also be used for capacity
 
@@ -85,6 +88,9 @@ class Edge {
         Edge<T> *reverse = nullptr;
 
         double flow; // for flow-related problems
+
+        //used for Christofides algorithm
+        bool traversed = false;
 };
 
 /********************** Graph  ****************************/
@@ -310,6 +316,11 @@ bool Edge<T>::isSelected() const {
 return this->selected;
 }
 
+template<class T>
+bool Edge<T>::isTraversed() const {
+return traversed;
+}
+
 template <class T>
 double Edge<T>::getFlow() const {
 return flow;
@@ -333,6 +344,11 @@ void Edge<T>::setFlow(double flow) {
 template <class T>
 void Edge<T>::setWeight(double weight) {
     this->weight = weight;
+}
+
+template<class T>
+void Edge<T>::setTraversed(bool traversed) {
+    this->traversed = traversed;
 }
 
 /********************** Graph  ****************************/

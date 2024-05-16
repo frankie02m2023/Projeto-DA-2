@@ -53,3 +53,11 @@ void Location::operator=(const Location &location) {
     x = location.x;
     y = location.y;
 }
+
+bool Location::operator==(const Location &location) const {
+    x == location.x && y == location.y;
+}
+
+bool Location::operator!=(const Location &location) const {
+    return x != location.x || y != location.y;
+}
