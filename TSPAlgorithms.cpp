@@ -337,8 +337,10 @@ void TSPAlgorithms::DFSBacktracking(Vertex<Node>* vertex, double& distance, doub
 }
 
 double TSPAlgorithms::getMinDistWithBackTracking(stack<Node> &minDistancePath) {
-    setAllVertexesAsUnvisited();
-    setAllVertexPathsNull();
+    for(Vertex<Node>* vertex : graph.getVertexSet()){
+        vertex->setVisited(false);
+        vertex->setPath(nullptr);
+    }
     Node initialNode = Node(0);
     Vertex<Node>* initialVertex = graph.findVertex(initialNode);
     double minDistance = INT_MAX;
@@ -600,13 +602,62 @@ void TSPAlgorithms::setReverseEdgeAsTraversed(Edge<Node> *edge) {
     }
 }
 
-void TSPAlgorithms::eulerPathDFS(Vertex<Node> *vertex, vector<Vertex<Node>*> &eulerPath) {
+void TSPAlgorithms::setReverseEdgeAsUnTraversed(Edge<Node> *edge) {
+    Vertex<Node>* reverseEdgeOrigin = edge->getDest();
+    for(Edge<Node>* reverseEdge : reverseEdgeOrigin->getAdj()){
+        if(reverseEdge->getDest()->getInfo() == edge->getOrig()->getInfo()){
+            reverseEdge->setTraversed(false);
+        }
+    }
+}
+
+void TSPAlgorithms::dfsEdgeIsBridge(Vertex<Node>* vertex, unsigned int& numberOfReachableEdges){
+    vertex->setVisited(true);
+    numberOfReachableEdges++;
+    for(Edge<Node>* edge : vertex->getAdj()){
+        if(!edge->getDest()->isVisited() && !edge->isTraversed()){
+            dfsEdgeIsBridge(edge->getDest(),numberOfReachableEdges);
+        }
+    }
+}
+
+bool TSPAlgorithms::edgeIsBridge(Edge<Node> *edge, Graph<Node> &mstGraph) {
+    for(Vertex<Node>* vertex : mstGraph.getVertexSet()){
+        vertex->setVisited(false);
+    }
+    Vertex<Node>* startNode = edge->getOrig();
+    unsigned int numberOfUntraversedEdges = 0;
+    for(Edge<Node>* edge : startNode->getAdj()){
+        if(!edge->isTraversed()){
+            numberOfUntraversedEdges++;
+        }
+    }
+    if(numberOfUntraversedEdges == 1){
+        return false;
+    }
+    unsigned int numberOfReachableVertexesWithEdge = 0;
+    unsigned int numberOfReachableVertexesWithoutEdge = 0;
+    dfsEdgeIsBridge(startNode,numberOfReachableVertexesWithEdge);
+    for(Vertex<Node>* vertex : mstGraph.getVertexSet()){
+        vertex->setVisited(false);
+    }
+    edge->setTraversed(true);
+    setReverseEdgeAsTraversed(edge);
+    dfsEdgeIsBridge(startNode,numberOfReachableVertexesWithoutEdge);
+    edge->setTraversed(false);
+    setReverseEdgeAsUnTraversed(edge);
+    return numberOfReachableVertexesWithEdge > numberOfReachableVertexesWithoutEdge;
+}
+
+void TSPAlgorithms::eulerPathDFS(Vertex<Node> *vertex, vector<Vertex<Node>*> &eulerPath, Graph<Node> &mstGraph) {
     for(Edge<Node>* edge : vertex->getAdj()){
         if(!edge->isTraversed()){
-            edge->setTraversed(true);
-            setReverseEdgeAsTraversed(edge);
-            eulerPath.push_back(edge->getDest());
-            eulerPathDFS(edge->getDest(),eulerPath);
+            if(!edgeIsBridge(edge,mstGraph)){
+                edge->setTraversed(true);
+                setReverseEdgeAsTraversed(edge);
+                eulerPath.push_back(edge->getDest());
+                eulerPathDFS(edge->getDest(),eulerPath,mstGraph);
+            }
         }
     }
 }
@@ -623,9 +674,8 @@ vector<Vertex<Node> *> TSPAlgorithms::findEulerPath(Graph<Node> &mstGraph) {
     }
     rootVertex->setVisited(true);
     vector<Edge<Node>*> edges = rootVertex->getAdj();
-    Vertex<Node>* testVertex = edges[edges.size() - 1]->getDest();
     eulerPath.push_back(rootVertex);
-    eulerPathDFS(rootVertex,eulerPath);
+    eulerPathDFS(rootVertex,eulerPath,mstGraph);
     return eulerPath;
 }
 
@@ -650,6 +700,9 @@ double TSPAlgorithms::getMinDistWithChristofidesAlgorithm(vector<Node> &minDistP
     for(Vertex<Node>* vertex : graph.getVertexSet()){
         vertex->setVisited(false);
         vertex->setPath(nullptr);
+        for(Edge<Node>* edge : vertex->getAdj()){
+            edge->setTraversed(false);
+        }
     }
     Node rootNode = Node(0);
     Vertex<Node>* root = graph.findVertex(rootNode);
