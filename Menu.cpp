@@ -334,12 +334,16 @@ void Menu::algorithmMenu(TSPAlgorithms tspAlgorithm) {
         cout << " Our own algorithm                                             ";
         cout << "******\n";
 
-        cout << "******";
-        cout << " 4. Back                                                          ";
+        cout << "****** 4.";
+        cout << " Our own algorithm for real-world graphs                       ";
         cout << "******\n";
 
         cout << "******";
-        cout << " 5. Exit                                                          ";
+        cout << " 5. Back                                                          ";
+        cout << "******\n";
+
+        cout << "******";
+        cout << " 6. Exit                                                          ";
         cout << "******\n";
 
         cout << "******************************************************************************\n";
@@ -387,10 +391,22 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 cout << "END" << endl;
                 break;
             }
-            case 4:
+            case 4:{
+                vector<Node> minPath;
+                double minPathDistance = tspAlgorithm.getMinDistWithRealWorldAlgorithm(minPath);
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
+                for(Node node : minPath){
+                    cout << node.getID() << " -> ";
+                }
+                cout << endl;
+                cout << "END" << endl;
+                break;
+            }
+
+            case 5:
                 cout << "Going back to Graph Selection..." << endl;
                 return;
-            case 5:
+            case 6:
                 cout << "Exiting..." << endl;
                 exit(0);  // Exit the program
             default:

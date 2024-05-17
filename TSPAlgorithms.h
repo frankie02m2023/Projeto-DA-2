@@ -44,4 +44,6 @@ public:
     double getMinDistWithTriangularInequality(vector<Node>& minDistPath);
     double getMinDistWithNearestNeighbourAnd2opt(vector<Node>& minDistPath);
     double getMinDistWithChristofidesAlgorithm(vector<Node>& minDistPath);
+    double getMinDistWithChristofidesAlgorithm(vector<Node>& minDistPath);
+    double getMinDistWithRealWorldAlgorithm(vector<Node>& minDistPath);
 };

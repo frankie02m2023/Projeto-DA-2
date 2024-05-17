@@ -724,4 +724,81 @@ double TSPAlgorithms::getMinDistWithChristofidesAlgorithm(vector<Node> &minDistP
     return minDistance;
 }
 
+double TSPAlgorithms::getMinDistWithRealWorldAlgorithm(vector<Node> &minDistPath) {
+    double minDistance = 0;
+    for(Vertex<Node>* vertex : graph.getVertexSet()){
+        vertex->setVisited(false);
+        vertex->setPath(nullptr);
+        for(Edge<Node>* edge : vertex->getAdj()){
+            edge->setTraversed(false);
+        }
+    }
+    size_t selectedNode;
+    size_t maxNode = graph.getVertexSet().size();
+    while (true)
+    {
+        cout 
+        << "\n"
+        << "Select your starting node from 0 to" << graph.getVertexSet().size()-1 << "\n";
+        cin >> selectedNode;
+        if (selectedNode < graph.getVertexSet().size() && selectedNode >= 0){
+            break;
+        }
+    }
+    
+    Node rootNode = Node(selectedNode);
+    Vertex<Node>* root = graph.findVertex(rootNode);
+    Vertex<Node>* rootcopy=root;
+
+    int minEdges = 0, minCost = 0, minEdgesCost = 0;
+    Vertex<Node> *minEdgesNode, *minCostNode;
+    
+    while(maxNode<minDistPath.size()){
+        
+
+        minEdges = INT_MAX;
+        minEdgesCost = INT_MAX;
+        minCost = INT_MAX;
+        minEdgesNode = nullptr;
+        minCostNode = nullptr;
+
+        minDistPath.push_back(root->getInfo());
+        for (auto i: root->getAdj())
+        {
+            if(i->getDest()->isVisited()){
+                continue;
+            }
+            if(i->getWeight()<minCost){
+                minCost=i->getWeight();
+                minCostNode = i->getDest();
+
+            }
+            if(i->getDest()->getAdj().size()<minEdges){
+                minEdges=i->getDest()->getAdj().size();
+                minEdgesNode=i->getDest();
+                minEdgesCost=i->getWeight();
+            }
+        }
+        if(minEdgesNode==nullptr){
+            return -1;
+        }
+        if(minEdges<=20){
+            minEdgesNode->setVisited(true);
+            minDistance+=minEdgesCost;
+            root=minEdgesNode;
+        }
+        else{
+            minCostNode->setVisited(true);
+            minDistance+=minCost;
+            root=minEdgesNode;
+        }
+    }
+    for(auto i:root->getAdj()){
+        if(i->getDest()==rootcopy){
+            return minDistance+i->getWeight();
+        }
+    }
+    return -1;
+}
+
 
