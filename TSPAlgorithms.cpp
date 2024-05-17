@@ -681,16 +681,14 @@ vector<Vertex<Node> *> TSPAlgorithms::findEulerPath(Graph<Node> &mstGraph) {
 
 vector<Vertex<Node> *> TSPAlgorithms::buildHamiltonianPath(vector<Vertex<Node> *> eulerPath) {
     vector<Vertex<Node>*> hamiltonianPath;
-    unsigned int rootCount = 0;
     for(Vertex<Node>* vertex : eulerPath){
         if(!vertex->isVisited()){
             vertex->setVisited(true);
-            if(vertex->getInfo().getID() == 0  && rootCount == 0){
-                rootCount++;
-                vertex->setVisited(false);
-            }
             hamiltonianPath.push_back(vertex);
         }
+    }
+    if(eulerPath[eulerPath.size() - 1]->getInfo().getID() == 0){
+        hamiltonianPath.push_back(eulerPath[eulerPath.size() - 1]);
     }
     return hamiltonianPath;
 }
