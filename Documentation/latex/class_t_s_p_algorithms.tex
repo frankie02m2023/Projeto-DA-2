@@ -1,0 +1,598 @@
+\doxysection{TSPAlgorithms Class Reference}
+\hypertarget{class_t_s_p_algorithms}{}\label{class_t_s_p_algorithms}\index{TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_t_s_p_algorithms_acefaa87ab90b1eba9ed417d60e934213}{TSPAlgorithms}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{string}} \&graph\+Name)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_t_s_p_algorithms}{TSPAlgorithms}, sets the graph name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{string}} \mbox{\hyperlink{class_t_s_p_algorithms_a8dea888ab956edd46160ccf54ee6c95b}{get\+Graph\+Name}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Gets the name of the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \mbox{\hyperlink{class_t_s_p_algorithms_a9ee156f67b2d5e8fddeb625a03f9d8ad}{get\+Graph}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Retrieves the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_t_s_p_algorithms_afba4fbbec08698e6172dbcd19a62a215}{is\+Graph\+Fully\+Connected}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Checks if the graph is fully connected. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_ae6a82fda7b3eac284ede9c61c65766e0}{set\+Graph\+Name}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{string}} \&graph\+Name)
+\begin{DoxyCompactList}\small\item\em Sets the name of the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a9c4c801c892093c4aaf15a22bf3c685a}{load\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Loads the graph by first loading the vertices and then the edges. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_t_s_p_algorithms_a44c33ce200e7613bb367ccd02127f597}{get\+Min\+Dist\+With\+Back\+Tracking}} (\mbox{\hyperlink{class_edge}{stack}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{min\+Dist\+Path}})
+\begin{DoxyCompactList}\small\item\em Finds the minimum distance using the backtracking algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_t_s_p_algorithms_a51c894c5952d85287e140e3894ceb88e}{get\+Min\+Dist\+With\+Triangular\+Inequality}} (\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{min\+Dist\+Path}})
+\begin{DoxyCompactList}\small\item\em Finds the minimum distance using the triangular inequality and MST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_t_s_p_algorithms_abbf54d415cd9f28b5cdba88b28c46689}{get\+Min\+Dist\+With\+Nearest\+Neighbour\+And2opt}} (\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{min\+Dist\+Path}})
+\begin{DoxyCompactList}\small\item\em Finds the minimum distance using the nearest neighbour and 2-\/opt algorithms. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_t_s_p_algorithms_acd73da6e0a85f3cfa3dcc08e6b6fb89d}{get\+Min\+Dist\+With\+Christofides\+Algorithm}} (\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{min\+Dist\+Path}})
+\begin{DoxyCompactList}\small\item\em Finds the minimum distance using the Christofides algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a3957e450d4599f8ee3ff28105b6aed02}{load\+Graph\+Vertexes}} ()
+\begin{DoxyCompactList}\small\item\em Loads the vertices of the graph from different data sources based on the graph name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_af964e3fa6df8ef1477fa472b2daf608d}{load\+Graph\+Edges}} (\mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{int}} \&\mbox{\hyperlink{class_edge}{number\+Of\+Graph\+Edges}})
+\begin{DoxyCompactList}\small\item\em Loads the edges of the graph and calculates the number of edges. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_aa4f1c8253c475ccb98f69d4a342c52c6}{set\+All\+Vertexes\+As\+Unvisited}} ()
+\begin{DoxyCompactList}\small\item\em Sets all vertices in the graph as unvisited. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_ad109e1d5a64bea6518987510325e5caa}{set\+All\+Vertex\+Paths\+Null}} ()
+\begin{DoxyCompactList}\small\item\em Sets the path of all vertices to null. \end{DoxyCompactList}\item 
+\Hypertarget{class_t_s_p_algorithms_a8f9c4da546fc5e462430ec3cb8a31161}\label{class_t_s_p_algorithms_a8f9c4da546fc5e462430ec3cb8a31161} 
+\mbox{\hyperlink{class_edge}{void}} {\bfseries reset\+Graph} ()
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a7670925701aa3efbf0c870d9cc711045}{DFSBacktracking}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{vertex}}, \mbox{\hyperlink{class_edge}{double}} \&\mbox{\hyperlink{class_edge}{distance}}, \mbox{\hyperlink{class_edge}{double}} \&\mbox{\hyperlink{class_edge}{min\+Distance}}, \mbox{\hyperlink{class_edge}{stack}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&path, \mbox{\hyperlink{class_edge}{stack}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{min\+Dist\+Path}})
+\begin{DoxyCompactList}\small\item\em Recursive function to perform DFS for the backtracking algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_t_s_p_algorithms_a61fac7326cb5d2d5dbaa36dfbd5d9b37}{find\+Min\+Dist\+Vertex}} (\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_edge}{vertexes}})
+\begin{DoxyCompactList}\small\item\em Finds the vertex with the minimum distance that has not been visited. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a94f1404c3a9fec22bddfd579f63298e5}{prim\+Algorithm}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{root}})
+\begin{DoxyCompactList}\small\item\em Performs Prim\textquotesingle{}s algorithm to create an MST starting from the root vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_adb2c06d2db515bb4357acba668ca9581}{MSTPre\+Order\+Visit\+DFS}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{root}}, \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{min\+Distance\+Path}})
+\begin{DoxyCompactList}\small\item\em Performs a pre-\/order DFS visit of the MST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_t_s_p_algorithms_a33e82a672513c7d08c10006ccb3cdc27}{get\+Nearest\+Neighbour\+Dist}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{vertex}})
+\begin{DoxyCompactList}\small\item\em Gets the nearest neighbour distance for the current vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_t_s_p_algorithms_a89afb446917ecf59b5c0c05223fdc6bc}{find\+Or\+Calculate\+Distance\+Between\+Vertexes}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{v1}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{v2}})
+\begin{DoxyCompactList}\small\item\em Finds or calculates the distance between two vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_ad171be802657d88ec4c6e3066c903555}{prim\+Algorithm\+Christofides}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{mst\+Graph}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{vertex}})
+\begin{DoxyCompactList}\small\item\em Performs Prim\textquotesingle{}s algorithm for Christofides to create an MST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_t_s_p_algorithms_af45a76b6407a6b087af55933a7b941d8}{get\+Odd\+Degrees}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \mbox{\hyperlink{class_edge}{mst\+Graph}})
+\begin{DoxyCompactList}\small\item\em Gets the vertices with odd degrees in the MST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_t_s_p_algorithms_a6acc81386b3d04bef00e5b218f48d5e7}{edge\+Between\+Vertexes}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{v1}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{v2}})
+\begin{DoxyCompactList}\small\item\em Checks if there is an edge between two vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a24a5b15a13626238021875e556095891}{find\+Perfect\+Matching}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{mst\+Graph}}, \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_edge}{vertex}})
+\begin{DoxyCompactList}\small\item\em Finds a perfect matching for the vertices with odd degrees. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_ab3ed9d0ff595ef91b88f86df08604b72}{set\+Reverse\+Edge\+As\+Traversed}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{edge}})
+\begin{DoxyCompactList}\small\item\em Sets the reverse edge of the given edge as traversed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a13b41905fee54ce82ef18ed06ca11655}{set\+Reverse\+Edge\+As\+Un\+Traversed}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{edge}})
+\begin{DoxyCompactList}\small\item\em Sets the reverse edge of the given edge as untraversed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_t_s_p_algorithms_a6f969cd7a5caab7ed8444aff3490beef}{edge\+Is\+Bridge}} (\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{edge}}, \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{mst\+Graph}})
+\begin{DoxyCompactList}\small\item\em Checks if an edge is a bridge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_acf174800f1db984b5c1bde03855acc04}{dfs\+Edge\+Is\+Bridge}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{vertex}}, \mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{int}} \&\mbox{\hyperlink{class_edge}{number\+Of\+Reachable\+Edges}})
+\begin{DoxyCompactList}\small\item\em Performs a DFS to check if an edge is a bridge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_t_s_p_algorithms_a4e3e5f18cd15a887d987cb832a3867b2}{euler\+Path\+DFS}} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{vertex}}, \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{euler\+Path}}, \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{mst\+Graph}})
+\begin{DoxyCompactList}\small\item\em Performs a Depth-\/\+First Search (DFS) to find the Eulerian path in the MST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_t_s_p_algorithms_a5022421b0de51dc5a134eb1ecf4e6ea2}{find\+Euler\+Path}} (\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&\mbox{\hyperlink{class_edge}{mst\+Graph}})
+\begin{DoxyCompactList}\small\item\em Finds the Eulerian path in the MST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_t_s_p_algorithms_abfe2dc67e7f2f84b3fb9b3386a783030}{build\+Hamiltonian\+Path}} (\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_edge}{euler\+Path}})
+\begin{DoxyCompactList}\small\item\em Builds the Hamiltonian path from the given Eulerian path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_t_s_p_algorithms_a986fd9449989613a83e917ed46db9d9c}\label{class_t_s_p_algorithms_a986fd9449989613a83e917ed46db9d9c} 
+\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ {\bfseries graph}
+\item 
+\Hypertarget{class_t_s_p_algorithms_aa342653c4b0e979e5e761cfd2aab5696}\label{class_t_s_p_algorithms_aa342653c4b0e979e5e761cfd2aab5696} 
+\mbox{\hyperlink{class_edge}{string}} {\bfseries graph\+Name}
+\item 
+\Hypertarget{class_t_s_p_algorithms_aa1670e9f5e1fa93c133a8e26163ca495}\label{class_t_s_p_algorithms_aa1670e9f5e1fa93c133a8e26163ca495} 
+\mbox{\hyperlink{class_edge}{bool}} {\bfseries graph\+Is\+Fully\+Connected}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_t_s_p_algorithms_acefaa87ab90b1eba9ed417d60e934213}\label{class_t_s_p_algorithms_acefaa87ab90b1eba9ed417d60e934213} 
+\index{TSPAlgorithms@{TSPAlgorithms}!TSPAlgorithms@{TSPAlgorithms}}
+\index{TSPAlgorithms@{TSPAlgorithms}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{TSPAlgorithms()}{TSPAlgorithms()}}
+{\footnotesize\ttfamily TSPAlgorithms\+::\+TSPAlgorithms (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{string}} \&}]{graph\+Name }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_t_s_p_algorithms}{TSPAlgorithms}, sets the graph name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph\+Name} & The name of the graph.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(1) 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_t_s_p_algorithms_abfe2dc67e7f2f84b3fb9b3386a783030}\label{class_t_s_p_algorithms_abfe2dc67e7f2f84b3fb9b3386a783030} 
+\index{TSPAlgorithms@{TSPAlgorithms}!buildHamiltonianPath@{buildHamiltonianPath}}
+\index{buildHamiltonianPath@{buildHamiltonianPath}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{buildHamiltonianPath()}{buildHamiltonianPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ TSPAlgorithms\+::build\+Hamiltonian\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$}]{euler\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Builds the Hamiltonian path from the given Eulerian path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em euler\+Path} & The Eulerian path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The vector of vertices representing the Hamiltonian path.
+\end{DoxyReturn}
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_a7670925701aa3efbf0c870d9cc711045}\label{class_t_s_p_algorithms_a7670925701aa3efbf0c870d9cc711045} 
+\index{TSPAlgorithms@{TSPAlgorithms}!DFSBacktracking@{DFSBacktracking}}
+\index{DFSBacktracking@{DFSBacktracking}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{DFSBacktracking()}{DFSBacktracking()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::\+DFSBacktracking (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{vertex,  }\item[{\mbox{\hyperlink{class_edge}{double}} \&}]{distance,  }\item[{\mbox{\hyperlink{class_edge}{double}} \&}]{min\+Distance,  }\item[{\mbox{\hyperlink{class_edge}{stack}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{path,  }\item[{\mbox{\hyperlink{class_edge}{stack}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{min\+Dist\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Recursive function to perform DFS for the backtracking algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The current vertex. \\
+\hline
+{\em distance} & The current distance. \\
+\hline
+{\em min\+Distance} & The minimum distance found. \\
+\hline
+{\em path} & The current path. \\
+\hline
+{\em min\+Distance\+Path} & The path with the minimum distance.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O((V+E)!) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_acf174800f1db984b5c1bde03855acc04}\label{class_t_s_p_algorithms_acf174800f1db984b5c1bde03855acc04} 
+\index{TSPAlgorithms@{TSPAlgorithms}!dfsEdgeIsBridge@{dfsEdgeIsBridge}}
+\index{dfsEdgeIsBridge@{dfsEdgeIsBridge}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{dfsEdgeIsBridge()}{dfsEdgeIsBridge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::dfs\+Edge\+Is\+Bridge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{vertex,  }\item[{\mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{int}} \&}]{number\+Of\+Reachable\+Edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs a DFS to check if an edge is a bridge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The current vertex. \\
+\hline
+{\em number\+Of\+Reachable\+Edges} & The number of reachable edges.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(V + E) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a6acc81386b3d04bef00e5b218f48d5e7}\label{class_t_s_p_algorithms_a6acc81386b3d04bef00e5b218f48d5e7} 
+\index{TSPAlgorithms@{TSPAlgorithms}!edgeBetweenVertexes@{edgeBetweenVertexes}}
+\index{edgeBetweenVertexes@{edgeBetweenVertexes}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{edgeBetweenVertexes()}{edgeBetweenVertexes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} TSPAlgorithms\+::edge\+Between\+Vertexes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{v1,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{v2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if there is an edge between two vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & The first vertex. \\
+\hline
+{\em v2} & The second vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there is an edge, false otherwise.
+\end{DoxyReturn}
+Complexity\+: O(\+E) where E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a6f969cd7a5caab7ed8444aff3490beef}\label{class_t_s_p_algorithms_a6f969cd7a5caab7ed8444aff3490beef} 
+\index{TSPAlgorithms@{TSPAlgorithms}!edgeIsBridge@{edgeIsBridge}}
+\index{edgeIsBridge@{edgeIsBridge}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{edgeIsBridge()}{edgeIsBridge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} TSPAlgorithms\+::edge\+Is\+Bridge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{edge,  }\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{mst\+Graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if an edge is a bridge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & The edge. \\
+\hline
+{\em mst\+Graph} & The MST graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge is a bridge, false otherwise.
+\end{DoxyReturn}
+Complexity\+: O(V + E) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a4e3e5f18cd15a887d987cb832a3867b2}\label{class_t_s_p_algorithms_a4e3e5f18cd15a887d987cb832a3867b2} 
+\index{TSPAlgorithms@{TSPAlgorithms}!eulerPathDFS@{eulerPathDFS}}
+\index{eulerPathDFS@{eulerPathDFS}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{eulerPathDFS()}{eulerPathDFS()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::euler\+Path\+DFS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{vertex,  }\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{euler\+Path,  }\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{mst\+Graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs a Depth-\/\+First Search (DFS) to find the Eulerian path in the MST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The current vertex being visited. \\
+\hline
+{\em euler\+Path} & The vector to store the Eulerian path. \\
+\hline
+{\em mst\+Graph} & The MST graph.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(V + E) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a5022421b0de51dc5a134eb1ecf4e6ea2}\label{class_t_s_p_algorithms_a5022421b0de51dc5a134eb1ecf4e6ea2} 
+\index{TSPAlgorithms@{TSPAlgorithms}!findEulerPath@{findEulerPath}}
+\index{findEulerPath@{findEulerPath}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{findEulerPath()}{findEulerPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ TSPAlgorithms\+::find\+Euler\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{mst\+Graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Finds the Eulerian path in the MST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mst\+Graph} & The MST graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The vector of vertices representing the Eulerian path.
+\end{DoxyReturn}
+Complexity\+: O(V + E) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a61fac7326cb5d2d5dbaa36dfbd5d9b37}\label{class_t_s_p_algorithms_a61fac7326cb5d2d5dbaa36dfbd5d9b37} 
+\index{TSPAlgorithms@{TSPAlgorithms}!findMinDistVertex@{findMinDistVertex}}
+\index{findMinDistVertex@{findMinDistVertex}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{findMinDistVertex()}{findMinDistVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} TSPAlgorithms\+::find\+Min\+Dist\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$}]{vertexes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Finds the vertex with the minimum distance that has not been visited. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertexes} & The list of vertices. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The vertex with the minimum distance.
+\end{DoxyReturn}
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_a89afb446917ecf59b5c0c05223fdc6bc}\label{class_t_s_p_algorithms_a89afb446917ecf59b5c0c05223fdc6bc} 
+\index{TSPAlgorithms@{TSPAlgorithms}!findOrCalculateDistanceBetweenVertexes@{findOrCalculateDistanceBetweenVertexes}}
+\index{findOrCalculateDistanceBetweenVertexes@{findOrCalculateDistanceBetweenVertexes}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{findOrCalculateDistanceBetweenVertexes()}{findOrCalculateDistanceBetweenVertexes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} TSPAlgorithms\+::find\+Or\+Calculate\+Distance\+Between\+Vertexes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{v1,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{v2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Finds or calculates the distance between two vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & The first vertex. \\
+\hline
+{\em v2} & The second vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance between the two vertices.
+\end{DoxyReturn}
+Complexity\+: O(\+E) where E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a24a5b15a13626238021875e556095891}\label{class_t_s_p_algorithms_a24a5b15a13626238021875e556095891} 
+\index{TSPAlgorithms@{TSPAlgorithms}!findPerfectMatching@{findPerfectMatching}}
+\index{findPerfectMatching@{findPerfectMatching}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{findPerfectMatching()}{findPerfectMatching()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::find\+Perfect\+Matching (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{mst\+Graph,  }\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Finds a perfect matching for the vertices with odd degrees. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mst\+Graph} & The MST graph. \\
+\hline
+{\em odd\+Degree\+Vertexes} & The vertices with odd degrees.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_a9ee156f67b2d5e8fddeb625a03f9d8ad}\label{class_t_s_p_algorithms_a9ee156f67b2d5e8fddeb625a03f9d8ad} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getGraph@{getGraph}}
+\index{getGraph@{getGraph}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ TSPAlgorithms\+::get\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the graph. 
+
+\begin{DoxyReturn}{Returns}
+The graph of nodes.
+\end{DoxyReturn}
+Complexity\+: O(1) \Hypertarget{class_t_s_p_algorithms_a8dea888ab956edd46160ccf54ee6c95b}\label{class_t_s_p_algorithms_a8dea888ab956edd46160ccf54ee6c95b} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getGraphName@{getGraphName}}
+\index{getGraphName@{getGraphName}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getGraphName()}{getGraphName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{string}} TSPAlgorithms\+::get\+Graph\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the name of the graph. 
+
+\begin{DoxyReturn}{Returns}
+The name of the graph.
+\end{DoxyReturn}
+Complexity\+: O(1) \Hypertarget{class_t_s_p_algorithms_a44c33ce200e7613bb367ccd02127f597}\label{class_t_s_p_algorithms_a44c33ce200e7613bb367ccd02127f597} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getMinDistWithBackTracking@{getMinDistWithBackTracking}}
+\index{getMinDistWithBackTracking@{getMinDistWithBackTracking}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getMinDistWithBackTracking()}{getMinDistWithBackTracking()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} TSPAlgorithms\+::get\+Min\+Dist\+With\+Back\+Tracking (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{stack}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{min\+Dist\+Path }\end{DoxyParamCaption})}
+
+
+
+Finds the minimum distance using the backtracking algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min\+Distance\+Path} & The path with the minimum distance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum distance.
+\end{DoxyReturn}
+Complexity\+: O((V+E)!) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_acd73da6e0a85f3cfa3dcc08e6b6fb89d}\label{class_t_s_p_algorithms_acd73da6e0a85f3cfa3dcc08e6b6fb89d} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getMinDistWithChristofidesAlgorithm@{getMinDistWithChristofidesAlgorithm}}
+\index{getMinDistWithChristofidesAlgorithm@{getMinDistWithChristofidesAlgorithm}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getMinDistWithChristofidesAlgorithm()}{getMinDistWithChristofidesAlgorithm()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} TSPAlgorithms\+::get\+Min\+Dist\+With\+Christofides\+Algorithm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{min\+Dist\+Path }\end{DoxyParamCaption})}
+
+
+
+Finds the minimum distance using the Christofides algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min\+Dist\+Path} & The path with the minimum distance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum distance.
+\end{DoxyReturn}
+Complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}3) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_abbf54d415cd9f28b5cdba88b28c46689}\label{class_t_s_p_algorithms_abbf54d415cd9f28b5cdba88b28c46689} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getMinDistWithNearestNeighbourAnd2opt@{getMinDistWithNearestNeighbourAnd2opt}}
+\index{getMinDistWithNearestNeighbourAnd2opt@{getMinDistWithNearestNeighbourAnd2opt}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getMinDistWithNearestNeighbourAnd2opt()}{getMinDistWithNearestNeighbourAnd2opt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} TSPAlgorithms\+::get\+Min\+Dist\+With\+Nearest\+Neighbour\+And2opt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{min\+Dist\+Path }\end{DoxyParamCaption})}
+
+
+
+Finds the minimum distance using the nearest neighbour and 2-\/opt algorithms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min\+Dist\+Path} & The path with the minimum distance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum distance.
+\end{DoxyReturn}
+Complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_a51c894c5952d85287e140e3894ceb88e}\label{class_t_s_p_algorithms_a51c894c5952d85287e140e3894ceb88e} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getMinDistWithTriangularInequality@{getMinDistWithTriangularInequality}}
+\index{getMinDistWithTriangularInequality@{getMinDistWithTriangularInequality}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getMinDistWithTriangularInequality()}{getMinDistWithTriangularInequality()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} TSPAlgorithms\+::get\+Min\+Dist\+With\+Triangular\+Inequality (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{min\+Dist\+Path }\end{DoxyParamCaption})}
+
+
+
+Finds the minimum distance using the triangular inequality and MST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min\+Dist\+Path} & The path with the minimum distance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum distance.
+\end{DoxyReturn}
+Complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_a33e82a672513c7d08c10006ccb3cdc27}\label{class_t_s_p_algorithms_a33e82a672513c7d08c10006ccb3cdc27} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getNearestNeighbourDist@{getNearestNeighbourDist}}
+\index{getNearestNeighbourDist@{getNearestNeighbourDist}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getNearestNeighbourDist()}{getNearestNeighbourDist()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} TSPAlgorithms\+::get\+Nearest\+Neighbour\+Dist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the nearest neighbour distance for the current vertex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The current vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The nearest neighbour distance.
+\end{DoxyReturn}
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_af45a76b6407a6b087af55933a7b941d8}\label{class_t_s_p_algorithms_af45a76b6407a6b087af55933a7b941d8} 
+\index{TSPAlgorithms@{TSPAlgorithms}!getOddDegrees@{getOddDegrees}}
+\index{getOddDegrees@{getOddDegrees}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{getOddDegrees()}{getOddDegrees()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ TSPAlgorithms\+::get\+Odd\+Degrees (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$}]{mst\+Graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the vertices with odd degrees in the MST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mst\+Graph} & The MST graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The vertices with odd degrees.
+\end{DoxyReturn}
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_afba4fbbec08698e6172dbcd19a62a215}\label{class_t_s_p_algorithms_afba4fbbec08698e6172dbcd19a62a215} 
+\index{TSPAlgorithms@{TSPAlgorithms}!isGraphFullyConnected@{isGraphFullyConnected}}
+\index{isGraphFullyConnected@{isGraphFullyConnected}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{isGraphFullyConnected()}{isGraphFullyConnected()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{bool}} TSPAlgorithms\+::is\+Graph\+Fully\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the graph is fully connected. 
+
+\begin{DoxyReturn}{Returns}
+True if the graph is fully connected, false otherwise.
+\end{DoxyReturn}
+Complexity\+: O(1) \Hypertarget{class_t_s_p_algorithms_a9c4c801c892093c4aaf15a22bf3c685a}\label{class_t_s_p_algorithms_a9c4c801c892093c4aaf15a22bf3c685a} 
+\index{TSPAlgorithms@{TSPAlgorithms}!loadGraph@{loadGraph}}
+\index{loadGraph@{loadGraph}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{loadGraph()}{loadGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::load\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads the graph by first loading the vertices and then the edges. 
+
+Complexity\+: O(V + E) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_af964e3fa6df8ef1477fa472b2daf608d}\label{class_t_s_p_algorithms_af964e3fa6df8ef1477fa472b2daf608d} 
+\index{TSPAlgorithms@{TSPAlgorithms}!loadGraphEdges@{loadGraphEdges}}
+\index{loadGraphEdges@{loadGraphEdges}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{loadGraphEdges()}{loadGraphEdges()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::load\+Graph\+Edges (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{int}} \&}]{number\+Of\+Graph\+Edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads the edges of the graph and calculates the number of edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Graph\+Edges} & The reference to store the number of graph edges.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(\+E) where E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a3957e450d4599f8ee3ff28105b6aed02}\label{class_t_s_p_algorithms_a3957e450d4599f8ee3ff28105b6aed02} 
+\index{TSPAlgorithms@{TSPAlgorithms}!loadGraphVertexes@{loadGraphVertexes}}
+\index{loadGraphVertexes@{loadGraphVertexes}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{loadGraphVertexes()}{loadGraphVertexes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::load\+Graph\+Vertexes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads the vertices of the graph from different data sources based on the graph name. 
+
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_adb2c06d2db515bb4357acba668ca9581}\label{class_t_s_p_algorithms_adb2c06d2db515bb4357acba668ca9581} 
+\index{TSPAlgorithms@{TSPAlgorithms}!MSTPreOrderVisitDFS@{MSTPreOrderVisitDFS}}
+\index{MSTPreOrderVisitDFS@{MSTPreOrderVisitDFS}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{MSTPreOrderVisitDFS()}{MSTPreOrderVisitDFS()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::\+MSTPre\+Order\+Visit\+DFS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{root,  }\item[{\mbox{\hyperlink{class_edge}{vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{min\+Distance\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs a pre-\/order DFS visit of the MST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & The root vertex. \\
+\hline
+{\em min\+Distance\+Path} & The path with the minimum distance.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(V + E) where V is the number of vertices and E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a94f1404c3a9fec22bddfd579f63298e5}\label{class_t_s_p_algorithms_a94f1404c3a9fec22bddfd579f63298e5} 
+\index{TSPAlgorithms@{TSPAlgorithms}!primAlgorithm@{primAlgorithm}}
+\index{primAlgorithm@{primAlgorithm}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{primAlgorithm()}{primAlgorithm()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::prim\+Algorithm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs Prim\textquotesingle{}s algorithm to create an MST starting from the root vertex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & The root vertex.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_ad171be802657d88ec4c6e3066c903555}\label{class_t_s_p_algorithms_ad171be802657d88ec4c6e3066c903555} 
+\index{TSPAlgorithms@{TSPAlgorithms}!primAlgorithmChristofides@{primAlgorithmChristofides}}
+\index{primAlgorithmChristofides@{primAlgorithmChristofides}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{primAlgorithmChristofides()}{primAlgorithmChristofides()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::prim\+Algorithm\+Christofides (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \&}]{mst\+Graph,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs Prim\textquotesingle{}s algorithm for Christofides to create an MST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mst\+Graph} & The MST graph to be created. \\
+\hline
+{\em root} & The root vertex.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_aa4f1c8253c475ccb98f69d4a342c52c6}\label{class_t_s_p_algorithms_aa4f1c8253c475ccb98f69d4a342c52c6} 
+\index{TSPAlgorithms@{TSPAlgorithms}!setAllVertexesAsUnvisited@{setAllVertexesAsUnvisited}}
+\index{setAllVertexesAsUnvisited@{setAllVertexesAsUnvisited}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{setAllVertexesAsUnvisited()}{setAllVertexesAsUnvisited()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::set\+All\+Vertexes\+As\+Unvisited (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sets all vertices in the graph as unvisited. 
+
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_ad109e1d5a64bea6518987510325e5caa}\label{class_t_s_p_algorithms_ad109e1d5a64bea6518987510325e5caa} 
+\index{TSPAlgorithms@{TSPAlgorithms}!setAllVertexPathsNull@{setAllVertexPathsNull}}
+\index{setAllVertexPathsNull@{setAllVertexPathsNull}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{setAllVertexPathsNull()}{setAllVertexPathsNull()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::set\+All\+Vertex\+Paths\+Null (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sets the path of all vertices to null. 
+
+Complexity\+: O(\+V) where V is the number of vertices. \Hypertarget{class_t_s_p_algorithms_ae6a82fda7b3eac284ede9c61c65766e0}\label{class_t_s_p_algorithms_ae6a82fda7b3eac284ede9c61c65766e0} 
+\index{TSPAlgorithms@{TSPAlgorithms}!setGraphName@{setGraphName}}
+\index{setGraphName@{setGraphName}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{setGraphName()}{setGraphName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::set\+Graph\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{string}} \&}]{graph\+Name }\end{DoxyParamCaption})}
+
+
+
+Sets the name of the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph\+Name} & The new name of the graph.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(1) \Hypertarget{class_t_s_p_algorithms_ab3ed9d0ff595ef91b88f86df08604b72}\label{class_t_s_p_algorithms_ab3ed9d0ff595ef91b88f86df08604b72} 
+\index{TSPAlgorithms@{TSPAlgorithms}!setReverseEdgeAsTraversed@{setReverseEdgeAsTraversed}}
+\index{setReverseEdgeAsTraversed@{setReverseEdgeAsTraversed}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{setReverseEdgeAsTraversed()}{setReverseEdgeAsTraversed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::set\+Reverse\+Edge\+As\+Traversed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sets the reverse edge of the given edge as traversed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & The edge.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(\+E) where E is the number of edges. \Hypertarget{class_t_s_p_algorithms_a13b41905fee54ce82ef18ed06ca11655}\label{class_t_s_p_algorithms_a13b41905fee54ce82ef18ed06ca11655} 
+\index{TSPAlgorithms@{TSPAlgorithms}!setReverseEdgeAsUnTraversed@{setReverseEdgeAsUnTraversed}}
+\index{setReverseEdgeAsUnTraversed@{setReverseEdgeAsUnTraversed}!TSPAlgorithms@{TSPAlgorithms}}
+\doxysubsubsection{\texorpdfstring{setReverseEdgeAsUnTraversed()}{setReverseEdgeAsUnTraversed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} TSPAlgorithms\+::set\+Reverse\+Edge\+As\+Un\+Traversed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_node}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sets the reverse edge of the given edge as untraversed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & The edge.\\
+\hline
+\end{DoxyParams}
+Complexity\+: O(\+E) where E is the number of edges. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+TSPAlgorithms.\+h\item 
+TSPAlgorithms.\+cpp\end{DoxyCompactItemize}
