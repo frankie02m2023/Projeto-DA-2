@@ -363,8 +363,8 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                     minPath.pop();
                 }
                 cout << "END" << endl;
-                break;
             }
+                break;
             case 2: {
                 vector<Node> minPath;
                 double minPathDistance = tspAlgorithm.getMinDistWithTriangularInequality(minPath);
@@ -372,10 +372,9 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
-                cout << endl;
                 cout << "END" << endl;
-                break;
             }
+                break;
             case 3: {
                 vector<Node> minPath;
                 double minPathDistance = tspAlgorithm.getMinDistWithChristofidesAlgorithm(minPath);
@@ -383,13 +382,12 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
-                cout << endl;
                 cout << "END" << endl;
-                break;
             }
+                break;
             case 4:
                 cout << "Going back to Graph Selection..." << endl;
-                return;
+                graphMenu();
             case 5:
                 cout << "Exiting..." << endl;
                 exit(0);  // Exit the program
