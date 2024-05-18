@@ -8,7 +8,8 @@ set( CMAKE_BUILD_TYPE "Release" )
 set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
 add_executable(Projeto-DA
-        Graph.h
+        CustomGraph.h
+        CustomGraph.cpp
         main.cpp
         Location.h
         Location.cpp
@@ -19,7 +20,6 @@ add_executable(Projeto-DA
         MutablePriorityQueue.h
         Menu.h
         Menu.cpp
-        CostumGraph.h
 )
 
 file(COPY Datasets/ToyGraphs/tourism.csv Datasets/ToyGraphs/stadiums.csv Datasets/ToyGraphs/shipping.csv  DESTINATION ${CMAKE_BINARY_DIR})
