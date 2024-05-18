@@ -331,7 +331,7 @@ void Menu::algorithmMenu(TSPAlgorithms tspAlgorithm) {
         cout << "******\n";
 
         cout << "****** 3.";
-        cout << " Our own algorithm                                             ";
+        cout << " Solve TSP with Christofides Algorithm                         ";
         cout << "******\n";
 
         cout << "******";
