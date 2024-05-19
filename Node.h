@@ -40,7 +40,7 @@ namespace std {
         size_t operator()(const Node &node) const{
             size_t idHash = hash<int>()(node.getID());
             size_t nameHash = hash<string>()(node.getName());
-            return (idHash ^ nameHash) >> 1;
+            return idHash >> 1;
         }
     };
 }

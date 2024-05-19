@@ -10,64 +10,9 @@
 #include <queue>
 #include "Node.h"
 
-class Edge; // Forward declaration of Edge
+class Vertex; // Forward declaration of Vertex
 
 /********************** Vertex  ****************************/
-
-class Vertex {
-public:
-    Vertex(Node info);
-
-    Node getInfo() const;
-    std::unordered_set<Edge*, std::hash<Edge*>, std::equal_to<Edge*>> getAdj() const;
-    bool isVisited() const;
-    bool isProcessing() const;
-    unsigned int getIndegree() const;
-    double getDist() const;
-    Edge* getPath() const;
-    std::unordered_set<Edge*, std::hash<Edge*>, std::equal_to<Edge*>> getIncoming() const;
-
-    void setInfo(Node info);
-    void setVisited(bool visited);
-    void setProcessing(bool processing);
-    void setIndegree(unsigned int indegree);
-    void setDist(double dist);
-    void setPath(Edge* path);
-    Edge* addEdge(Vertex* dest, double w);
-    bool removeEdge(Node in);
-    void removeOutgoingEdges();
-    bool operator==(const Vertex& vertex) const;
-    size_t hash() const;
-
-protected:
-    Node info; // info node
-    std::unordered_set<Edge*, std::hash<Edge*>, std::equal_to<Edge*>> adj; // outgoing edges
-
-    // auxiliary fields
-    bool visited = false; // used by DFS, BFS, Prim ...
-    bool processing = false; // used by isDAG (in addition to the visited attribute)
-    unsigned int indegree; // used by topsort
-    double dist = 0;
-    Edge* path = nullptr;
-
-    std::unordered_set<Edge*, std::hash<Edge*>, std::equal_to<Edge*>> incoming; // incoming edges
-    void deleteEdge(Edge* edge);
-};
-
-struct hashVertex {
-    size_t operator()(const Vertex* vertex) const {
-        return vertex->hash();
-    }
-};
-
-struct vertexEquality {
-    bool operator()(const Vertex* v1, const Vertex* v2) const {
-        return *v1 == *v2;
-    }
-};
-
-/********************** Edge  ****************************/
-
 class Edge {
 public:
     Edge(Vertex* orig, Vertex* dest, double w);
@@ -105,21 +50,75 @@ protected:
     bool traversed = false;
 };
 
-namespace std {
-    template <>
-    struct hash<Edge> {
-        size_t operator()(const Edge* edge) const {
-            return edge->hash();
-        }
-    };
 
-    template <>
-    struct equal_to<Edge> {
-        bool operator()(const Edge* e1, const Edge* e2) const {
-            return *e1 == *e2;
-        }
-    };
-}
+struct edgeHash {
+    size_t operator()(const Edge* edge) const {
+        return edge->hash();
+    }
+};
+
+struct edgeEquality {
+    bool operator()(const Edge* e1, const Edge* e2) const {
+        return *e1 == *e2;
+    }
+};
+
+class Vertex {
+public:
+    Vertex(Node info);
+
+    Node getInfo() const;
+    std::unordered_set<Edge*, edgeHash, edgeEquality> getAdj() const;
+    bool isVisited() const;
+    bool isProcessing() const;
+    unsigned int getIndegree() const;
+    double getDist() const;
+    Edge* getPath() const;
+    std::unordered_set<Edge*, edgeHash, edgeEquality> getIncoming() const;
+
+    void setInfo(Node info);
+    void setVisited(bool visited);
+    void setProcessing(bool processing);
+    void setIndegree(unsigned int indegree);
+    void setDist(double dist);
+    void setPath(Edge* path);
+    Edge* addEdge(Vertex* dest, double w);
+    Edge* findEdge(Vertex* dest);
+    bool removeEdge(Node in);
+    void removeOutgoingEdges();
+    bool operator==(const Vertex& vertex) const;
+    size_t hash() const;
+
+protected:
+    Node info; // info node
+    std::unordered_set<Edge*, edgeHash, edgeEquality> adj; // outgoing edges
+
+    // auxiliary fields
+    bool visited = false; // used by DFS, BFS, Prim ...
+    bool processing = false; // used by isDAG (in addition to the visited attribute)
+    unsigned int indegree; // used by topsort
+    double dist = 0;
+    Edge* path = nullptr;
+
+    std::unordered_set<Edge*, edgeHash, edgeEquality> incoming; // incoming edges
+    void deleteEdge(Edge* edge);
+};
+
+struct hashVertex {
+    size_t operator()(const Vertex* vertex) const {
+        return vertex->hash();
+    }
+};
+
+struct vertexEquality {
+    bool operator()(const Vertex* v1, const Vertex* v2) const {
+        return *v1 == *v2;
+    }
+};
+
+/********************** Edge  ****************************/
+
+
 
 /********************** Graph  ****************************/
 
@@ -136,7 +135,9 @@ public:
      */
     bool addVertex(const Node& in);
     bool removeVertex(const Node& in);
-
+    /* Auxiliary function to find a vertex with a given the content.
+    */
+    Edge* findEdge(const Node& sourc, const Node& dest) const;
     /*
      * Adds an edge to a graph (this), given the contents of the source and
      * destination vertices and the edge weight (w).
