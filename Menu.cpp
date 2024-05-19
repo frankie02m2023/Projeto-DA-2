@@ -109,7 +109,11 @@ void Menu::handleToyGraphs(int choice) {
                 {
                     string GraphName1 = "shipping";
                     TSPAlgorithms tspAlgorithm1(GraphName1);
+                    auto start = chrono::high_resolution_clock::now();
                     tspAlgorithm1.loadGraph();
+                    auto end = chrono::high_resolution_clock::now();
+                    chrono::duration<double> duration = end - start;
+                    cout << "Loading time: " << duration.count() << " seconds" << endl;
                     algorithmMenu(tspAlgorithm1);
                 }
                 break;
@@ -118,7 +122,11 @@ void Menu::handleToyGraphs(int choice) {
                 {
                     string GraphName2 = "stadiums";
                     TSPAlgorithms tspAlgorithm2(GraphName2);
+                    auto start = chrono::high_resolution_clock::now();
                     tspAlgorithm2.loadGraph();
+                    auto end = chrono::high_resolution_clock::now();
+                    chrono::duration<double> duration = end - start;
+                    cout << "Loading time: " << duration.count() << " seconds" << endl;
                     algorithmMenu(tspAlgorithm2);
                 }
                 break;
@@ -127,7 +135,11 @@ void Menu::handleToyGraphs(int choice) {
                 {
                     string GraphName3 = "tourism";
                     TSPAlgorithms tspAlgorithm3(GraphName3);
+                    auto start = chrono::high_resolution_clock::now();
                     tspAlgorithm3.loadGraph();
+                    auto end = chrono::high_resolution_clock::now();
+                    chrono::duration<double> duration = end - start;
+                    cout << "Loading time: " << duration.count() << " seconds" << endl;
                     algorithmMenu(tspAlgorithm3);
                 }
                 break;
@@ -225,7 +237,11 @@ void Menu::handleMediumGraphs(int choice) {
         if (choice >= 1 && choice <= 12) {
             cout << "Loading the selected Medium Graph..." << endl;
             TSPAlgorithms tspAlgorithm(edgeFiles[choice - 1]);
+            auto start = chrono::high_resolution_clock::now();
             tspAlgorithm.loadGraph();
+            auto end = chrono::high_resolution_clock::now();
+            chrono::duration<double> duration = end - start;
+            cout << "Loading time: " << duration.count() << " seconds" << endl;
             algorithmMenu(tspAlgorithm);
             break;
         } else if (choice == 13) {
@@ -282,7 +298,11 @@ void Menu::handleRealWorldGraphs(int choice) {
                 cout << "Loading Real World Graph 1..." << endl;
                 string GraphName1 = "Graph1";
                 TSPAlgorithms tspAlgorithm1(GraphName1);
+                auto start = chrono::high_resolution_clock::now();
                 tspAlgorithm1.loadGraph();
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
+                cout << "Loading time: " << duration.count() << " seconds" << endl;
                 algorithmMenu(tspAlgorithm1);
             }
                 break;
@@ -291,7 +311,11 @@ void Menu::handleRealWorldGraphs(int choice) {
                 cout << "Loading Real World Graph 2..." << endl;
                 string GraphName2 = "Graph2";
                 TSPAlgorithms tspAlgorithm2(GraphName2);
+                auto start = chrono::high_resolution_clock::now();
                 tspAlgorithm2.loadGraph();
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
+                cout << "Loading time: " << duration.count() << " seconds" << endl;
                 algorithmMenu(tspAlgorithm2);
             }
                 break;
@@ -300,7 +324,11 @@ void Menu::handleRealWorldGraphs(int choice) {
                 cout << "Loading Real World Graph 3..." << endl;
                 string GraphName3 = "Graph3";
                 TSPAlgorithms tspAlgorithm3(GraphName3);
+                auto start = chrono::high_resolution_clock::now();
                 tspAlgorithm3.loadGraph();
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
+                cout << "Loading time: " << duration.count() << " seconds" << endl;
                 algorithmMenu(tspAlgorithm3);
             }
                 break;
@@ -331,7 +359,7 @@ void Menu::algorithmMenu(TSPAlgorithms tspAlgorithm) {
         cout << "******\n";
 
         cout << "****** 3.";
-        cout << " Our own algorithm                                             ";
+        cout << " Solve TSP with Christofides Algorithm                         ";
         cout << "******\n";
 
         cout << "******";
@@ -356,33 +384,45 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
         switch (choice) {
             case 1: {
                 stack<Node> minPath;
+                auto start = chrono::high_resolution_clock::now();
                 double minPathDistance = tspAlgorithm.getMinDistWithBackTracking(minPath);
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
                 cout << "Minimum Path Distance: " << minPathDistance << endl;
                 while (!minPath.empty()) {
                     cout << minPath.top().getID() << " -> ";
                     minPath.pop();
                 }
                 cout << "END" << endl;
+                std::cout << "Backtracking execution time: " << duration.count() << " seconds" << std::endl;
             }
                 break;
             case 2: {
                 vector<Node> minPath;
+                auto start = chrono::high_resolution_clock::now();
                 double minPathDistance = tspAlgorithm.getMinDistWithTriangularInequality(minPath);
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
                 cout << "Minimum Path Distance: " << minPathDistance << endl;
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
                 cout << "END" << endl;
+                cout << "Triangular inequality execution time: " << duration.count() << " seconds" << endl;
             }
                 break;
             case 3: {
                 vector<Node> minPath;
+                auto start = chrono::high_resolution_clock::now();
                 double minPathDistance = tspAlgorithm.getMinDistWithChristofidesAlgorithm(minPath);
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
                 cout << "Minimum Path Distance: " << minPathDistance << endl;
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
                 cout << "END" << endl;
+                cout << "Christofides execution time: " << duration.count() << " seconds" << endl;
             }
                 break;
             case 4:

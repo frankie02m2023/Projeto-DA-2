@@ -4,10 +4,10 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "TSPAlgorithms.h"
-#include "MutablePriorityQueue.h"
 
-Graph<Node> TSPAlgorithms::getGraph() const {
+Graph TSPAlgorithms::getGraph() const {
     return graph;
 }
 
@@ -208,13 +208,12 @@ void TSPAlgorithms::loadGraphEdges(unsigned int& numberOfGraphEdges) {
             Node destinationNode = Node(idDestination);
 
             numberOfGraphEdges+=2;
-            graph.addEdge(sourceNode,destinationNode,distance);
-            graph.addEdge(destinationNode, sourceNode, distance);
+            graph.addBidirectionalEdge(sourceNode,destinationNode,distance);
 
             if(graphName == "tourism"){
-                Vertex<Node>* sourceVertex = graph.findVertex(sourceNode);
+                Vertex* sourceVertex = graph.findVertex(sourceNode);
                 sourceVertex->getInfo().setName(sourceName);
-                Vertex<Node>* destinationVertex = graph.findVertex(destinationNode);
+                Vertex* destinationVertex = graph.findVertex(destinationNode);
                 destinationVertex->getInfo().setName(destinationName);
             }
         }
@@ -269,8 +268,7 @@ void TSPAlgorithms::loadGraphEdges(unsigned int& numberOfGraphEdges) {
             Node destinationNode = Node(idDestination);
 
             numberOfGraphEdges+=2;
-            graph.addEdge(sourceNode,destinationNode,distance);
-            graph.addEdge(destinationNode, sourceNode, distance);
+            graph.addBidirectionalEdge(sourceNode,destinationNode,distance);
         }
     }
 }
@@ -290,22 +288,22 @@ void TSPAlgorithms::loadGraph() {
 }
 
 void TSPAlgorithms::setAllVertexesAsUnvisited() {
-    for(Vertex<Node>* vertex : graph.getVertexSet()){
+    for(Vertex* vertex : graph.getVertexSet()){
         vertex->setVisited(false);
     }
 }
 
 void TSPAlgorithms::setAllVertexPathsNull(){
-    for(Vertex<Node>* vertex : graph.getVertexSet()){
+    for(Vertex* vertex : graph.getVertexSet()){
         vertex->setPath(nullptr);
     }
 }
 
-void TSPAlgorithms::DFSBacktracking(Vertex<Node>* vertex, double& distance, double &minDistance, stack<Node>& path,stack<Node>& minDistancePath) {
+void TSPAlgorithms::DFSBacktracking(Vertex* vertex, double& distance, double &minDistance, stack<Node>& path,stack<Node>& minDistancePath) {
     if(path.size() == graph.getVertexSet().size()){
         double auxDistance;
         bool found_zero = false;
-        for(Edge<Node>* edge : vertex->getAdj()){
+        for(Edge* edge : vertex->getAdj()){
             if(edge->getDest()->getInfo().getID() == 0){
                 distance+=edge->getWeight();
                 auxDistance = edge->getWeight();
@@ -323,7 +321,7 @@ void TSPAlgorithms::DFSBacktracking(Vertex<Node>* vertex, double& distance, doub
         path.pop();
         return;
     }
-    for(Edge<Node>* edge : vertex->getAdj()){
+    for(Edge* edge : vertex->getAdj()){
         if(!edge->getDest()->isVisited()){
             vertex->setVisited(true);
             path.push(edge->getDest()->getInfo());
@@ -337,12 +335,12 @@ void TSPAlgorithms::DFSBacktracking(Vertex<Node>* vertex, double& distance, doub
 }
 
 double TSPAlgorithms::getMinDistWithBackTracking(stack<Node> &minDistancePath) {
-    for(Vertex<Node>* vertex : graph.getVertexSet()){
+    for(Vertex* vertex : graph.getVertexSet()){
         vertex->setVisited(false);
         vertex->setPath(nullptr);
     }
     Node initialNode = Node(0);
-    Vertex<Node>* initialVertex = graph.findVertex(initialNode);
+    Vertex* initialVertex = graph.findVertex(initialNode);
     double minDistance = INT_MAX;
     double distance = 0;
     stack<Node> path;
@@ -351,10 +349,10 @@ double TSPAlgorithms::getMinDistWithBackTracking(stack<Node> &minDistancePath) {
     return minDistance;
 }
 
-Vertex<Node> *TSPAlgorithms::findMinDistVertex(vector<Vertex<Node> *> vertexes) {
+Vertex* TSPAlgorithms::findMinDistVertex(vector<Vertex *> vertexes) {
     double minDist = INT_MAX;
-    Vertex<Node>* minDistVertex = nullptr;
-    for(Vertex<Node>* vertex : vertexes){
+    Vertex* minDistVertex = nullptr;
+    for(Vertex* vertex : vertexes){
         if(!vertex->isVisited() && vertex->getDist() < minDist){
             minDist = vertex->getDist();
             minDistVertex = vertex;
@@ -363,18 +361,18 @@ Vertex<Node> *TSPAlgorithms::findMinDistVertex(vector<Vertex<Node> *> vertexes) 
     return minDistVertex;
 }
 
-void TSPAlgorithms::primAlgorithm(Vertex<Node>* root) {
-    vector<Vertex<Node>*> vertexes;
+void TSPAlgorithms::primAlgorithm(Vertex* root) {
+    vector<Vertex*> vertexes;
     unsigned int numberOfVertexesInTree = 1;
 
-    for(Vertex<Node>* vertex :graph.getVertexSet()){
+    for(Vertex* vertex :graph.getVertexSet()){
         vertex->setDist(INT_MAX);
         vertex->setPath(nullptr);
         vertexes.push_back(vertex);
     }
 
 
-    for(Edge<Node>* edge : root->getAdj()){
+    for(Edge* edge : root->getAdj()){
         edge->getDest()->setDist(edge->getWeight());
         edge->getDest()->setPath(edge);
     }
@@ -382,10 +380,10 @@ void TSPAlgorithms::primAlgorithm(Vertex<Node>* root) {
     root->setVisited(true);
 
     while(numberOfVertexesInTree < graph.getVertexSet().size()){
-        Vertex<Node>* minDistVertex = findMinDistVertex(vertexes);
+        Vertex* minDistVertex = findMinDistVertex(vertexes);
         numberOfVertexesInTree++;
         minDistVertex->setVisited(true);
-        for(Edge<Node>* edge : minDistVertex->getAdj()){
+        for(Edge* edge : minDistVertex->getAdj()){
             if(!edge->getDest()->isVisited() && edge->getDest()->getDist() > edge->getWeight()){
                 edge->getDest()->setDist(edge->getWeight());
                 edge->getDest()->setPath(edge);
@@ -394,8 +392,8 @@ void TSPAlgorithms::primAlgorithm(Vertex<Node>* root) {
     }
 }
 
-void TSPAlgorithms::MSTPreOrderVisitDFS(Vertex<Node> *root, vector<Vertex<Node>*> &minDistancePath) {
-    for(Edge<Node>* edge : root->getAdj()){
+void TSPAlgorithms::MSTPreOrderVisitDFS(Vertex *root, vector<Vertex*> &minDistancePath) {
+    for(Edge* edge : root->getAdj()){
         if(edge->getDest()->getPath() == edge && !edge->getDest()->isVisited()){
             minDistancePath.push_back(edge->getDest());
             edge->getDest()->setVisited(true);
@@ -405,20 +403,20 @@ void TSPAlgorithms::MSTPreOrderVisitDFS(Vertex<Node> *root, vector<Vertex<Node>*
 }
 
 double TSPAlgorithms::getMinDistWithTriangularInequality(vector<Node> &minDistPath) {
-    for(Vertex<Node>* vertex : graph.getVertexSet()){
+    for(Vertex* vertex : graph.getVertexSet()){
         vertex->setVisited(false);
         vertex->setPath(nullptr);
     }
     Node rootNode = Node(0);
-    Vertex<Node>* root = graph.findVertex(rootNode);
+    Vertex* root = graph.findVertex(rootNode);
     primAlgorithm(root);
-    for(Vertex<Node>* vertex : graph.getVertexSet()){
+    for(Vertex* vertex : graph.getVertexSet()){
         if(vertex->getInfo().getID() != 0){
             vertex->setVisited(false);
         }
     }
     double minDistance = 0;
-    vector<Vertex<Node>*> minDistPathVertexes;
+    vector<Vertex*> minDistPathVertexes;
     minDistPathVertexes.push_back(root);
     MSTPreOrderVisitDFS(root,minDistPathVertexes);
     minDistPathVertexes.push_back(root);
@@ -426,7 +424,7 @@ double TSPAlgorithms::getMinDistWithTriangularInequality(vector<Node> &minDistPa
     for(int i = 0; i < minDistPathVertexes.size() - 1; i++){
         foundEdge = false;
         minDistPath.push_back(minDistPathVertexes[i]->getInfo());
-        for(Edge<Node>* edge : minDistPathVertexes[i]->getAdj()){
+        for(Edge* edge : minDistPathVertexes[i]->getAdj()){
             if(edge->getDest()->getInfo() == minDistPathVertexes[i + 1]->getInfo()){
                 minDistance+=edge->getWeight();
                 foundEdge = true;
@@ -441,7 +439,7 @@ double TSPAlgorithms::getMinDistWithTriangularInequality(vector<Node> &minDistPa
         }
     }
     minDistPath.push_back(rootNode);
-    for(Edge<Node>* edge : root->getAdj()){
+    for(Edge* edge : root->getAdj()){
         if(edge->getDest()->getInfo() == minDistPathVertexes[minDistPathVertexes.size() - 1]->getInfo()){
             minDistance+=edge->getWeight();
             break;
@@ -450,10 +448,10 @@ double TSPAlgorithms::getMinDistWithTriangularInequality(vector<Node> &minDistPa
     return minDistance;
 }
 
-double TSPAlgorithms::getNearestNeighbourDist(Vertex<Node> *vertex) {
+double TSPAlgorithms::getNearestNeighbourDist(Vertex *vertex) {
     double minDist = INT_MAX;
-    Vertex<Node>* selectedNode = nullptr;
-    for(Edge<Node>* edge : vertex->getAdj()){
+    Vertex* selectedNode = nullptr;
+    for(Edge* edge : vertex->getAdj()){
         if(!edge->getDest()->isVisited() && edge->getWeight() < minDist){
             minDist = edge->getWeight();
             selectedNode = edge->getDest();
@@ -467,16 +465,16 @@ double TSPAlgorithms::getMinDistWithNearestNeighbourAnd2opt(vector<Node> &minDis
     setAllVertexesAsUnvisited();
     double minDist = 0;
     Node root = Node(0);
-    Vertex<Node>* rootVertex = graph.findVertex(0);
+    Vertex* rootVertex = graph.findVertex(0);
     minDistPath.push_back(root);
-    Vertex<Node>* currentVertex = rootVertex;
+    Vertex* currentVertex = rootVertex;
     currentVertex->setVisited(true);
     while(minDistPath.size() < graph.getVertexSet().size()){
         minDist+= getNearestNeighbourDist(currentVertex);
         currentVertex->setVisited(true);
         minDistPath.push_back(currentVertex->getInfo());
     }
-    for(Edge<Node>* edge : currentVertex->getAdj()){
+    for(Edge* edge : currentVertex->getAdj()){
         if(edge->getDest()->getInfo() == root){
             minDist += edge->getWeight();
         }
@@ -484,25 +482,24 @@ double TSPAlgorithms::getMinDistWithNearestNeighbourAnd2opt(vector<Node> &minDis
     return minDist;
 }
 
-double TSPAlgorithms::findOrCalculateDistanceBetweenVertexes(Vertex<Node> *v1, Vertex<Node> *v2) {
-    Vertex<Node>* firstVertex = graph.findVertex(v1->getInfo());
-    for(Edge<Node>* edge : firstVertex->getAdj()){
-        if(edge->getDest()->getInfo() == v2->getInfo()){
-            return edge->getWeight();
+double TSPAlgorithms::findOrCalculateDistanceBetweenVertexes(Vertex *v1, Vertex *v2) {
+    Vertex* v1Graph = graph.findVertex(v1->getInfo());
+    Vertex* v2Graph = graph.findVertex(v2->getInfo());
+    if(v1Graph->findEdge(v2Graph) == nullptr){
+        Location defaultLocation = Location(INT_MIN, INT_MIN);
+        if(v1->getInfo().getLocation() != defaultLocation && v2->getInfo().getLocation() != defaultLocation){
+            return v1->getInfo().getLocation().getHaversineDistance(v2->getInfo().getLocation());
         }
+        return 0;
     }
-    Location defaultLocation = Location(INT_MIN, INT_MIN);
-    if(v1->getInfo().getLocation() != defaultLocation && v2->getInfo().getLocation() != defaultLocation){
-        return v1->getInfo().getLocation().getHaversineDistance(v2->getInfo().getLocation());
-    }
-    return 0;
+    return v1Graph->findEdge(v2Graph)->getWeight();
 }
 
-void TSPAlgorithms::primAlgorithmChristofides(Graph<Node>& mstGraph, Vertex<Node> *root) {
-    vector<Vertex<Node>*> vertexes;
+void TSPAlgorithms::primAlgorithmChristofides(Graph& mstGraph, Vertex *root) {
+    vector<Vertex*> vertexes;
     unsigned int numberOfVertexesInTree = 1;
 
-    for(Vertex<Node>* vertex :graph.getVertexSet()){
+    for(Vertex* vertex :graph.getVertexSet()){
         vertex->setDist(INT_MAX);
         vertex->setPath(nullptr);
         vertexes.push_back(vertex);
@@ -510,7 +507,7 @@ void TSPAlgorithms::primAlgorithmChristofides(Graph<Node>& mstGraph, Vertex<Node
     }
 
 
-    for(Edge<Node>* edge : root->getAdj()){
+    for(Edge* edge : root->getAdj()){
         edge->getDest()->setDist(edge->getWeight());
         edge->getDest()->setPath(edge);
     }
@@ -518,11 +515,11 @@ void TSPAlgorithms::primAlgorithmChristofides(Graph<Node>& mstGraph, Vertex<Node
     root->setVisited(true);
 
     while(numberOfVertexesInTree < graph.getVertexSet().size()){
-        Vertex<Node>* minDistVertex = findMinDistVertex(vertexes);
-        Edge<Node>* pathEdge;
+        Vertex* minDistVertex = findMinDistVertex(vertexes);
+        Edge* pathEdge;
         numberOfVertexesInTree++;
         minDistVertex->setVisited(true);
-        for(Edge<Node>* edge : minDistVertex->getAdj()){
+        for(Edge* edge : minDistVertex->getAdj()){
             if(!edge->getDest()->isVisited() && edge->getDest()->getDist() > edge->getWeight()){
                 edge->getDest()->setDist(edge->getWeight());
                 edge->getDest()->setPath(edge);
@@ -530,18 +527,17 @@ void TSPAlgorithms::primAlgorithmChristofides(Graph<Node>& mstGraph, Vertex<Node
             }
         }
     }
-    for (Vertex<Node>* vertex : vertexes) {
-        Edge<Node>* pathEdge = vertex->getPath();
+    for (Vertex* vertex : vertexes) {
+        Edge* pathEdge = vertex->getPath();
         if (pathEdge != nullptr) {
-            mstGraph.addEdge(pathEdge->getOrig()->getInfo(), pathEdge->getDest()->getInfo(), pathEdge->getWeight());
-            mstGraph.addEdge(pathEdge->getDest()->getInfo(), pathEdge->getOrig()->getInfo(), pathEdge->getWeight());
+            mstGraph.addBidirectionalEdge(pathEdge->getOrig()->getInfo(), pathEdge->getDest()->getInfo(), pathEdge->getWeight());
         }
     }
 }
 
-vector<Vertex<Node>*> TSPAlgorithms::getOddDegrees(Graph<Node> mstGraph) {
-    vector<Vertex<Node>*> oddDegreeVertexes;
-    for(Vertex<Node>* vertex : mstGraph.getVertexSet()){
+vector<Vertex*> TSPAlgorithms::getOddDegrees(Graph mstGraph) {
+    vector<Vertex*> oddDegreeVertexes;
+    for(Vertex* vertex : mstGraph.getVertexSet()){
         if(vertex->getAdj().size() % 2 != 0){
             oddDegreeVertexes.push_back(vertex);
         }
@@ -549,8 +545,8 @@ vector<Vertex<Node>*> TSPAlgorithms::getOddDegrees(Graph<Node> mstGraph) {
     return oddDegreeVertexes;
 }
 
-bool TSPAlgorithms::edgeBetweenVertexes(Vertex<Node> *v1, Vertex<Node> *v2) {
-    for(Edge<Node>* edge : v1->getAdj()){
+bool TSPAlgorithms::edgeBetweenVertexes(Vertex *v1, Vertex *v2) {
+    for(Edge* edge : v1->getAdj()){
         if(edge->getDest()->getInfo() == v2->getInfo()){
             return true;
         }
@@ -558,8 +554,8 @@ bool TSPAlgorithms::edgeBetweenVertexes(Vertex<Node> *v1, Vertex<Node> *v2) {
     return false;
 }
 
-void TSPAlgorithms::findPerfectMatching(Graph<Node>& mstGraph, vector<Vertex<Node>*> oddDegreeVertexes){
-    vector<Vertex<Node>*> vertexesWithEvenDegree;
+void TSPAlgorithms::findPerfectMatching(Graph& mstGraph, vector<Vertex*> oddDegreeVertexes){
+    vector<Vertex*> vertexesWithEvenDegree;
     vector<bool> paired;
     for(unsigned int i = 0; i < oddDegreeVertexes.size(); i++){
         paired.push_back(false);
@@ -586,48 +582,29 @@ void TSPAlgorithms::findPerfectMatching(Graph<Node>& mstGraph, vector<Vertex<Nod
             vertexesWithEvenDegree.push_back(oddDegreeVertexes[pairedVertexIndex]);
             paired[i] = true;
             paired[pairedVertexIndex] = true;
-            mstGraph.addEdge(oddDegreeVertexes[i]->getInfo(), oddDegreeVertexes[pairedVertexIndex]->getInfo(),minDistance);
-            mstGraph.addEdge(oddDegreeVertexes[pairedVertexIndex]->getInfo(), oddDegreeVertexes[i]->getInfo(),minDistance);
+            mstGraph.addBidirectionalEdge(oddDegreeVertexes[i]->getInfo(), oddDegreeVertexes[pairedVertexIndex]->getInfo(),minDistance);
             minDistance = INT_MAX;
         }
     }
 }
 
-void TSPAlgorithms::setReverseEdgeAsTraversed(Edge<Node> *edge) {
-    Vertex<Node>* reverseEdgeOrigin = edge->getDest();
-    for(Edge<Node>* reverseEdge : reverseEdgeOrigin->getAdj()){
-        if(reverseEdge->getDest()->getInfo() == edge->getOrig()->getInfo()){
-            reverseEdge->setTraversed(true);
-        }
-    }
-}
-
-void TSPAlgorithms::setReverseEdgeAsUnTraversed(Edge<Node> *edge) {
-    Vertex<Node>* reverseEdgeOrigin = edge->getDest();
-    for(Edge<Node>* reverseEdge : reverseEdgeOrigin->getAdj()){
-        if(reverseEdge->getDest()->getInfo() == edge->getOrig()->getInfo()){
-            reverseEdge->setTraversed(false);
-        }
-    }
-}
-
-void TSPAlgorithms::dfsEdgeIsBridge(Vertex<Node>* vertex, unsigned int& numberOfReachableEdges){
+void TSPAlgorithms::dfsEdgeIsBridge(Vertex* vertex, unsigned int& numberOfReachableEdges){
     vertex->setVisited(true);
     numberOfReachableEdges++;
-    for(Edge<Node>* edge : vertex->getAdj()){
+    for(Edge* edge : vertex->getAdj()){
         if(!edge->getDest()->isVisited() && !edge->isTraversed()){
             dfsEdgeIsBridge(edge->getDest(),numberOfReachableEdges);
         }
     }
 }
 
-bool TSPAlgorithms::edgeIsBridge(Edge<Node> *edge, Graph<Node> &mstGraph) {
-    for(Vertex<Node>* vertex : mstGraph.getVertexSet()){
+bool TSPAlgorithms::edgeIsBridge(Edge *edge, Graph &mstGraph) {
+    for(Vertex* vertex : mstGraph.getVertexSet()){
         vertex->setVisited(false);
     }
-    Vertex<Node>* startNode = edge->getOrig();
+    Vertex* startNode = edge->getOrig();
     unsigned int numberOfUntraversedEdges = 0;
-    for(Edge<Node>* edge : startNode->getAdj()){
+    for(Edge* edge : startNode->getAdj()){
         if(!edge->isTraversed()){
             numberOfUntraversedEdges++;
         }
@@ -638,23 +615,23 @@ bool TSPAlgorithms::edgeIsBridge(Edge<Node> *edge, Graph<Node> &mstGraph) {
     unsigned int numberOfReachableVertexesWithEdge = 0;
     unsigned int numberOfReachableVertexesWithoutEdge = 0;
     dfsEdgeIsBridge(startNode,numberOfReachableVertexesWithEdge);
-    for(Vertex<Node>* vertex : mstGraph.getVertexSet()){
+    for(Vertex* vertex : mstGraph.getVertexSet()){
         vertex->setVisited(false);
     }
     edge->setTraversed(true);
-    setReverseEdgeAsTraversed(edge);
+    edge->getReverse()->setTraversed(true);
     dfsEdgeIsBridge(startNode,numberOfReachableVertexesWithoutEdge);
     edge->setTraversed(false);
-    setReverseEdgeAsUnTraversed(edge);
+    edge->getReverse()->setTraversed(false);
     return numberOfReachableVertexesWithEdge > numberOfReachableVertexesWithoutEdge;
 }
 
-void TSPAlgorithms::eulerPathDFS(Vertex<Node> *vertex, vector<Vertex<Node>*> &eulerPath, Graph<Node> &mstGraph) {
-    for(Edge<Node>* edge : vertex->getAdj()){
+void TSPAlgorithms::eulerPathDFS(Vertex *vertex, vector<Vertex*> &eulerPath, Graph &mstGraph) {
+    for(Edge* edge : vertex->getAdj()){
         if(!edge->isTraversed()){
             if(!edgeIsBridge(edge,mstGraph)){
                 edge->setTraversed(true);
-                setReverseEdgeAsTraversed(edge);
+                edge->getReverse()->setTraversed(true);
                 eulerPath.push_back(edge->getDest());
                 eulerPathDFS(edge->getDest(),eulerPath,mstGraph);
             }
@@ -662,26 +639,25 @@ void TSPAlgorithms::eulerPathDFS(Vertex<Node> *vertex, vector<Vertex<Node>*> &eu
     }
 }
 
-vector<Vertex<Node> *> TSPAlgorithms::findEulerPath(Graph<Node> &mstGraph) {
+vector<Vertex *> TSPAlgorithms::findEulerPath(Graph &mstGraph) {
     Node root = Node(0);
-    Vertex<Node>* rootVertex = mstGraph.findVertex(root);
-    vector<Vertex<Node>*> eulerPath;
-    for(Vertex<Node>* vertex : mstGraph.getVertexSet()){
+    Vertex* rootVertex = mstGraph.findVertex(root);
+    vector<Vertex*> eulerPath;
+    for(Vertex* vertex : mstGraph.getVertexSet()){
         vertex->setVisited(false);
-        for(Edge<Node>* edge : vertex->getAdj()){
+        for(Edge* edge : vertex->getAdj()){
             edge->setTraversed(false);
         }
     }
     rootVertex->setVisited(true);
-    vector<Edge<Node>*> edges = rootVertex->getAdj();
     eulerPath.push_back(rootVertex);
     eulerPathDFS(rootVertex,eulerPath,mstGraph);
     return eulerPath;
 }
 
-vector<Vertex<Node> *> TSPAlgorithms::buildHamiltonianPath(vector<Vertex<Node> *> eulerPath) {
-    vector<Vertex<Node>*> hamiltonianPath;
-    for(Vertex<Node>* vertex : eulerPath){
+vector<Vertex *> TSPAlgorithms::buildHamiltonianPath(vector<Vertex *> eulerPath) {
+    vector<Vertex*> hamiltonianPath;
+    for(Vertex* vertex : eulerPath){
         if(!vertex->isVisited()){
             vertex->setVisited(true);
             hamiltonianPath.push_back(vertex);
@@ -695,25 +671,25 @@ vector<Vertex<Node> *> TSPAlgorithms::buildHamiltonianPath(vector<Vertex<Node> *
 
 double TSPAlgorithms::getMinDistWithChristofidesAlgorithm(vector<Node> &minDistPath) {
     double minDistance = 0;
-    for(Vertex<Node>* vertex : graph.getVertexSet()){
+    for(Vertex* vertex : graph.getVertexSet()){
         vertex->setVisited(false);
         vertex->setPath(nullptr);
-        for(Edge<Node>* edge : vertex->getAdj()){
+        for(Edge* edge : vertex->getAdj()){
             edge->setTraversed(false);
         }
     }
     Node rootNode = Node(0);
-    Vertex<Node>* root = graph.findVertex(rootNode);
-    Graph<Node> mstGraph;
+    Vertex* root = graph.findVertex(rootNode);
+    Graph mstGraph;
     primAlgorithmChristofides(mstGraph,root);
-    vector<Vertex<Node>*> vertexesWithOddDegrees;
+    vector<Vertex*> vertexesWithOddDegrees;
     vertexesWithOddDegrees = getOddDegrees(mstGraph);
     findPerfectMatching(mstGraph,vertexesWithOddDegrees);
-    vector<Vertex<Node>*> eulerPath = findEulerPath(mstGraph);
-    for(Vertex<Node>* vertex :mstGraph.getVertexSet()){
+    vector<Vertex*> eulerPath = findEulerPath(mstGraph);
+    for(Vertex* vertex :mstGraph.getVertexSet()){
         vertex->setVisited(false);
     }
-    vector<Vertex<Node>*> hamiltonianPath = buildHamiltonianPath(eulerPath);
+    vector<Vertex*> hamiltonianPath = buildHamiltonianPath(eulerPath);
     for(unsigned int i = 0; i < hamiltonianPath.size() - 1; i++){
         minDistPath.push_back(hamiltonianPath[i]->getInfo());
         minDistance+=findOrCalculateDistanceBetweenVertexes(hamiltonianPath[i],hamiltonianPath[i + 1]);

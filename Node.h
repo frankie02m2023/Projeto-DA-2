@@ -34,4 +34,15 @@ public:
     bool operator!=(const Node& node) const;
 };
 
+namespace std {
+    template<>
+    struct hash<Node> {
+        size_t operator()(const Node &node) const{
+            size_t idHash = hash<int>()(node.getID());
+            size_t nameHash = hash<string>()(node.getName());
+            return idHash >> 1;
+        }
+    };
+}
+
 #endif //DA2324_P03_STUDENT_NODE_H

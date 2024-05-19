@@ -2,15 +2,16 @@
 // Created by franc on 07/05/2024.
 //
 
-#include "graph.h"
-#include "Node.h"
+#include "CustomGraph.h"
 #include <stack>
 
 class TSPAlgorithms{
 
 private:
 
-    Graph<Node> graph;
+
+    Graph graph;
+
 
     string graphName;
 
@@ -48,6 +49,7 @@ private:
 
     void resetGraph();
 
+
     /**
      * @brief Recursive function to perform DFS for the backtracking algorithm.
      *
@@ -59,7 +61,7 @@ private:
      *
      * Complexity: O((V+E)!) where V is the number of vertices and E is the number of edges.
      */
-    void DFSBacktracking(Vertex<Node>* vertex, double& distance, double &minDistance, stack<Node>& path, stack<Node>& minDistPath);
+    void DFSBacktracking(Vertex* vertex, double& distance, double &minDistance, stack<Node>& path, stack<Node>& minDistPath);
 
     /**
      * @brief Finds the vertex with the minimum distance that has not been visited.
@@ -69,7 +71,7 @@ private:
      *
      * Complexity: O(V) where V is the number of vertices.
      */
-    Vertex<Node>* findMinDistVertex(vector<Vertex<Node>*> vertexes);
+    Vertex* findMinDistVertex(vector<Vertex*> vertexes);
 
     /**
      * @brief Performs Prim's algorithm to create an MST starting from the root vertex.
@@ -78,7 +80,7 @@ private:
      *
      * Complexity: O(V^2) where V is the number of vertices.
      */
-    void primAlgorithm(Vertex<Node>* root);
+    void primAlgorithm(Vertex* root);
 
     /**
      * @brief Performs a pre-order DFS visit of the MST.
@@ -88,7 +90,7 @@ private:
      *
      * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
      */
-    void MSTPreOrderVisitDFS(Vertex<Node>* root, vector<Vertex<Node>*>& minDistancePath);
+    void MSTPreOrderVisitDFS(Vertex* root, vector<Vertex*>& minDistancePath);
 
     /**
      * @brief Gets the nearest neighbour distance for the current vertex.
@@ -98,7 +100,7 @@ private:
      *
      * Complexity: O(V) where V is the number of vertices.
      */
-    double getNearestNeighbourDist(Vertex<Node>* vertex);
+    double getNearestNeighbourDist(Vertex* vertex);
 
     /**
      * @brief Finds or calculates the distance between two vertices.
@@ -109,7 +111,7 @@ private:
      *
      * Complexity: O(E) where E is the number of edges.
      */
-    double findOrCalculateDistanceBetweenVertexes(Vertex<Node>* v1, Vertex<Node>* v2);
+    double findOrCalculateDistanceBetweenVertexes(Vertex* v1, Vertex* v2);
 
     /**
      * @brief Performs Prim's algorithm for Christofides to create an MST.
@@ -119,7 +121,7 @@ private:
      *
      * Complexity: O(V^2) where V is the number of vertices.
      */
-    void primAlgorithmChristofides(Graph<Node>& mstGraph, Vertex<Node>* vertex);
+    void primAlgorithmChristofides(Graph& mstGraph, Vertex* vertex);
 
     /**
      * @brief Gets the vertices with odd degrees in the MST.
@@ -129,7 +131,7 @@ private:
      *
      * Complexity: O(V) where V is the number of vertices.
      */
-    vector<Vertex<Node>*> getOddDegrees(Graph<Node> mstGraph);
+    vector<Vertex*> getOddDegrees(Graph mstGraph);
 
     /**
      * @brief Checks if there is an edge between two vertices.
@@ -140,7 +142,7 @@ private:
      *
      * Complexity: O(E) where E is the number of edges.
      */
-    bool edgeBetweenVertexes(Vertex<Node>* v1, Vertex<Node>* v2);
+    bool edgeBetweenVertexes(Vertex* v1, Vertex* v2);
 
     /**
      * @brief Finds a perfect matching for the vertices with odd degrees.
@@ -150,25 +152,8 @@ private:
      *
      * Complexity: O(V^2) where V is the number of vertices.
      */
-    void findPerfectMatching(Graph<Node>& mstGraph,vector<Vertex<Node>*> vertex);
+    void findPerfectMatching(Graph& mstGraph,vector<Vertex*> vertex);
 
-    /**
-     * @brief Sets the reverse edge of the given edge as traversed.
-     *
-     * @param edge The edge.
-     *
-     * Complexity: O(E) where E is the number of edges.
-     */
-    void setReverseEdgeAsTraversed(Edge<Node>* edge);
-
-    /**
-     * @brief Sets the reverse edge of the given edge as untraversed.
-     *
-     * @param edge The edge.
-     *
-     * Complexity: O(E) where E is the number of edges.
-     */
-    void setReverseEdgeAsUnTraversed(Edge<Node>* edge);
 
     /**
       * @brief Checks if an edge is a bridge.
@@ -179,7 +164,7 @@ private:
       *
       * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
       */
-    bool edgeIsBridge(Edge<Node>* edge, Graph<Node> &mstGraph);
+    bool edgeIsBridge(Edge* edge, Graph &mstGraph);
 
     /**
      * @brief Performs a DFS to check if an edge is a bridge.
@@ -189,7 +174,7 @@ private:
      *
      * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
      */
-    void dfsEdgeIsBridge(Vertex<Node>* vertex, unsigned int& numberOfReachableEdges);
+    void dfsEdgeIsBridge(Vertex* vertex, unsigned int& numberOfReachableEdges);
 
     /**
      * @brief Performs a Depth-First Search (DFS) to find the Eulerian path in the MST.
@@ -200,7 +185,7 @@ private:
      *
      * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
      */
-    void eulerPathDFS(Vertex<Node>* vertex, vector<Vertex<Node>*>& eulerPath, Graph<Node> &mstGraph);
+    void eulerPathDFS(Vertex* vertex, vector<Vertex*>& eulerPath, Graph &mstGraph);
 
     /**
      * @brief Finds the Eulerian path in the MST.
@@ -210,7 +195,7 @@ private:
      *
      * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
      */
-    vector<Vertex<Node>*> findEulerPath(Graph<Node>& mstGraph);
+    vector<Vertex*> findEulerPath(Graph& mstGraph);
 
     /**
      * @brief Builds the Hamiltonian path from the given Eulerian path.
@@ -220,7 +205,8 @@ private:
      *
      * Complexity: O(V) where V is the number of vertices.
      */
-    vector<Vertex<Node>*> buildHamiltonianPath(vector<Vertex<Node>*> eulerPath);
+    vector<Vertex*> buildHamiltonianPath(vector<Vertex*> eulerPath);
+
 
 public:
 
@@ -249,7 +235,7 @@ public:
      *
      * Complexity: O(1)
      */
-    Graph<Node> getGraph() const;
+    Graph getGraph() const;
 
     /**
      * @brief Checks if the graph is fully connected.
@@ -258,6 +244,7 @@ public:
      *
      * Complexity: O(1)
      */
+
     bool isGraphFullyConnected() const;
 
     /**
