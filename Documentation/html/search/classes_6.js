@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vertex_0',['Vertex',['../class_vertex.html',1,'']]]
+  ['tspalgorithms_0',['TSPAlgorithms',['../class_t_s_p_algorithms.html',1,'']]]
 ];

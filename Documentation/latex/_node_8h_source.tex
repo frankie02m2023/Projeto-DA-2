@@ -37,6 +37,17 @@
 \DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ \mbox{\hyperlink{class_edge}{node}})\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00035\ \};}
 \DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA2324\_P03\_STUDENT\_NODE\_H}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }std\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{struct\ }hash<\mbox{\hyperlink{class_node}{Node}}>\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\ \&\mbox{\hyperlink{class_edge}{node}})\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_edge}{idHash}}\ =\ \mbox{\hyperlink{class_edge}{hash<int>}}()(\mbox{\hyperlink{class_edge}{node}}.getID());}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_edge}{nameHash}}\ =\ \mbox{\hyperlink{class_edge}{hash<string>}}()(\mbox{\hyperlink{class_edge}{node}}.getName());}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_edge}{idHash}}\ >>\ 1;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \};}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA2324\_P03\_STUDENT\_NODE\_H}}
 
 \end{DoxyCode}

@@ -5,87 +5,85 @@
 \DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ franc\ on\ 07/05/2024.}}
 \DoxyCodeLine{00003\ \textcolor{comment}{//}}
 \DoxyCodeLine{00004\ }
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}graph.h"{}}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Node.h"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stack>}}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t_s_p_algorithms}{TSPAlgorithms}}\{}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CustomGraph.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t_s_p_algorithms}{TSPAlgorithms}}\{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ }
 \DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_edge}{Graph<Node>}}\ graph;}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph}}\ graph;}
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{string}\ graphName;}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ graphIsFullyConnected;}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a3957e450d4599f8ee3ff28105b6aed02}{loadGraphVertexes}}();}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_af964e3fa6df8ef1477fa472b2daf608d}{loadGraphEdges}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{class_edge}{numberOfGraphEdges}});}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_aa4f1c8253c475ccb98f69d4a342c52c6}{setAllVertexesAsUnvisited}}();}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ad109e1d5a64bea6518987510325e5caa}{setAllVertexPathsNull}}();}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ resetGraph();}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{string}\ graphName;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ graphIsFullyConnected;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a3957e450d4599f8ee3ff28105b6aed02}{loadGraphVertexes}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_af964e3fa6df8ef1477fa472b2daf608d}{loadGraphEdges}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{class_edge}{numberOfGraphEdges}});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_aa4f1c8253c475ccb98f69d4a342c52c6}{setAllVertexesAsUnvisited}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ad109e1d5a64bea6518987510325e5caa}{setAllVertexPathsNull}}();}
+\DoxyCodeLine{00049\ }
 \DoxyCodeLine{00050\ }
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a7670925701aa3efbf0c870d9cc711045}{DFSBacktracking}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{class_edge}{distance}},\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_edge}{minDistance}},\ \mbox{\hyperlink{class_edge}{stack<Node>}}\&\ path,\ \mbox{\hyperlink{class_edge}{stack<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a98ff6471bd1b28828eafa4600bbb4258}{DFSBacktracking}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{class_edge}{distance}},\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_edge}{minDistance}},\ \mbox{\hyperlink{class_edge}{stack<Node>}}\&\ path,\ \mbox{\hyperlink{class_edge}{stack<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
 \DoxyCodeLine{00063\ }
-\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_t_s_p_algorithms_a61fac7326cb5d2d5dbaa36dfbd5d9b37}{findMinDistVertex}}(\mbox{\hyperlink{class_edge}{vector}}<\mbox{\hyperlink{class_edge}{Vertex<Node>}}*>\ \mbox{\hyperlink{class_edge}{vertexes}});}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_t_s_p_algorithms_a10ef105bf266a10fde97919bf2796b39}{findMinDistVertex}}(\mbox{\hyperlink{class_edge}{vector<Vertex*>}}\ \mbox{\hyperlink{class_edge}{vertexes}});}
 \DoxyCodeLine{00073\ }
-\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a94f1404c3a9fec22bddfd579f63298e5}{primAlgorithm}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{root}});}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a1828911a5c896eed0f47ffc54a5f907d}{primAlgorithm}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{root}});}
 \DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_adb2c06d2db515bb4357acba668ca9581}{MSTPreOrderVisitDFS}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{root}},\ \mbox{\hyperlink{class_edge}{vector}}<\mbox{\hyperlink{class_edge}{Vertex<Node>}}*>\&\ \mbox{\hyperlink{class_edge}{minDistancePath}});}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a33e82a672513c7d08c10006ccb3cdc27}{getNearestNeighbourDist}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{vertex}});}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a692f2d66d8b3f323a4047c610a4a0ebf}{MSTPreOrderVisitDFS}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{root}},\ \mbox{\hyperlink{class_edge}{vector<Vertex*>}}\&\ \mbox{\hyperlink{class_edge}{minDistancePath}});}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_accea94f7f88211c4d95b76d545471917}{getNearestNeighbourDist}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \mbox{\hyperlink{class_node}{Node}}\&\ \mbox{\hyperlink{class_edge}{selectedNode}},\ \textcolor{keywordtype}{bool}\&\ \mbox{\hyperlink{class_edge}{foundNewEdges}});}
+\DoxyCodeLine{00102\ }
 \DoxyCodeLine{00103\ }
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a89afb446917ecf59b5c0c05223fdc6bc}{findOrCalculateDistanceBetweenVertexes}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{v1}},\ \mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{v2}});}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a032b48e8ca6d2cf94db9b8ccbd7add8c}{findOrCalculateDistanceBetweenVertexes}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{v1}},\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{v2}});}
 \DoxyCodeLine{00114\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ad171be802657d88ec4c6e3066c903555}{primAlgorithmChristofides}}(\mbox{\hyperlink{class_edge}{Graph<Node>}}\&\ \mbox{\hyperlink{class_edge}{mstGraph}},\ \mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{vertex}});}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ae42132ecda567c2332390f7f9403cd95}{primAlgorithmChristofides}}(\mbox{\hyperlink{class_graph}{Graph}}\&\ \mbox{\hyperlink{class_edge}{mstGraph}},\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{vertex}});}
 \DoxyCodeLine{00124\ }
-\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<Vertex<Node>}}*>\ \mbox{\hyperlink{class_t_s_p_algorithms_af45a76b6407a6b087af55933a7b941d8}{getOddDegrees}}(\mbox{\hyperlink{class_edge}{Graph<Node>}}\ \mbox{\hyperlink{class_edge}{mstGraph}});}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<Vertex*>}}\ \mbox{\hyperlink{class_t_s_p_algorithms_af9e29de393ee602e6e419460ba429bfe}{getOddDegrees}}(\mbox{\hyperlink{class_graph}{Graph}}\ \mbox{\hyperlink{class_edge}{mstGraph}});}
 \DoxyCodeLine{00134\ }
-\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_t_s_p_algorithms_a6acc81386b3d04bef00e5b218f48d5e7}{edgeBetweenVertexes}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{v1}},\ \mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{v2}});}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_t_s_p_algorithms_aa639e086de224586f4a231aa81a0d52a}{edgeBetweenVertexes}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{v1}},\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{v2}});}
 \DoxyCodeLine{00145\ }
-\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a24a5b15a13626238021875e556095891}{findPerfectMatching}}(\mbox{\hyperlink{class_edge}{Graph<Node>}}\&\ \mbox{\hyperlink{class_edge}{mstGraph}},\mbox{\hyperlink{class_edge}{vector}}<\mbox{\hyperlink{class_edge}{Vertex<Node>}}*>\ \mbox{\hyperlink{class_edge}{vertex}});}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ab77c56d39f2ff325ffdddd689f57b296}{findPerfectMatching}}(\mbox{\hyperlink{class_graph}{Graph}}\&\ \mbox{\hyperlink{class_edge}{mstGraph}},\mbox{\hyperlink{class_edge}{vector<Vertex*>}}\ \mbox{\hyperlink{class_edge}{vertex}});}
 \DoxyCodeLine{00155\ }
-\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ab3ed9d0ff595ef91b88f86df08604b72}{setReverseEdgeAsTraversed}}(\mbox{\hyperlink{class_edge}{Edge<Node>}}*\ \mbox{\hyperlink{class_edge}{edge}});}
-\DoxyCodeLine{00164\ }
-\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a13b41905fee54ce82ef18ed06ca11655}{setReverseEdgeAsUnTraversed}}(\mbox{\hyperlink{class_edge}{Edge<Node>}}*\ \mbox{\hyperlink{class_edge}{edge}});}
-\DoxyCodeLine{00173\ }
-\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_t_s_p_algorithms_a6f969cd7a5caab7ed8444aff3490beef}{edgeIsBridge}}(\mbox{\hyperlink{class_edge}{Edge<Node>}}*\ \mbox{\hyperlink{class_edge}{edge}},\ \mbox{\hyperlink{class_edge}{Graph<Node>}}\ \&\mbox{\hyperlink{class_edge}{mstGraph}});}
-\DoxyCodeLine{00184\ }
-\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_acf174800f1db984b5c1bde03855acc04}{dfsEdgeIsBridge}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{class_edge}{numberOfReachableEdges}});}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a4e3e5f18cd15a887d987cb832a3867b2}{eulerPathDFS}}(\mbox{\hyperlink{class_edge}{Vertex<Node>}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \mbox{\hyperlink{class_edge}{vector}}<\mbox{\hyperlink{class_edge}{Vertex<Node>}}*>\&\ \mbox{\hyperlink{class_edge}{eulerPath}},\ \mbox{\hyperlink{class_edge}{Graph<Node>}}\ \&\mbox{\hyperlink{class_edge}{mstGraph}});}
-\DoxyCodeLine{00205\ }
-\DoxyCodeLine{00214\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<Vertex<Node>}}*>\ \mbox{\hyperlink{class_t_s_p_algorithms_a5022421b0de51dc5a134eb1ecf4e6ea2}{findEulerPath}}(\mbox{\hyperlink{class_edge}{Graph<Node>}}\&\ \mbox{\hyperlink{class_edge}{mstGraph}});}
-\DoxyCodeLine{00215\ }
-\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<Vertex<Node>}}*>\ \mbox{\hyperlink{class_t_s_p_algorithms_abfe2dc67e7f2f84b3fb9b3386a783030}{buildHamiltonianPath}}(\mbox{\hyperlink{class_edge}{vector}}<\mbox{\hyperlink{class_edge}{Vertex<Node>}}*>\ \mbox{\hyperlink{class_edge}{eulerPath}});}
-\DoxyCodeLine{00225\ }
-\DoxyCodeLine{00226\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00227\ }
-\DoxyCodeLine{00235\ \ \ \ \ \mbox{\hyperlink{class_t_s_p_algorithms_acefaa87ab90b1eba9ed417d60e934213}{TSPAlgorithms}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ graphName);}
-\DoxyCodeLine{00236\ }
-\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_t_s_p_algorithms_a8dea888ab956edd46160ccf54ee6c95b}{getGraphName}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00245\ }
-\DoxyCodeLine{00253\ \ \ \ \ \mbox{\hyperlink{class_edge}{Graph<Node>}}\ \mbox{\hyperlink{class_t_s_p_algorithms_a9ee156f67b2d5e8fddeb625a03f9d8ad}{getGraph}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00254\ }
-\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_t_s_p_algorithms_afba4fbbec08698e6172dbcd19a62a215}{isGraphFullyConnected}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00263\ }
-\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ae6a82fda7b3eac284ede9c61c65766e0}{setGraphName}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ graphName);}
-\DoxyCodeLine{00272\ }
-\DoxyCodeLine{00273\ }
-\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a9c4c801c892093c4aaf15a22bf3c685a}{loadGraph}}();}
-\DoxyCodeLine{00280\ }
-\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a44c33ce200e7613bb367ccd02127f597}{getMinDistWithBackTracking}}(\mbox{\hyperlink{class_edge}{stack<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
-\DoxyCodeLine{00290\ }
-\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a51c894c5952d85287e140e3894ceb88e}{getMinDistWithTriangularInequality}}(\mbox{\hyperlink{class_edge}{vector<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
-\DoxyCodeLine{00300\ }
-\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_abbf54d415cd9f28b5cdba88b28c46689}{getMinDistWithNearestNeighbourAnd2opt}}(\mbox{\hyperlink{class_edge}{vector<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
-\DoxyCodeLine{00310\ }
-\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_acd73da6e0a85f3cfa3dcc08e6b6fb89d}{getMinDistWithChristofidesAlgorithm}}(\mbox{\hyperlink{class_edge}{vector<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
-\DoxyCodeLine{00320\ \};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_t_s_p_algorithms_a900ed322abb8a7d355c465bb6af23c3f}{edgeIsBridge}}(\mbox{\hyperlink{class_edge}{Edge}}*\ \mbox{\hyperlink{class_edge}{edge}},\ \mbox{\hyperlink{class_graph}{Graph}}\ \&\mbox{\hyperlink{class_edge}{mstGraph}});}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a5511957d1dc14115e50148f5c3a8a433}{dfsEdgeIsBridge}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{class_edge}{numberOfReachableEdges}});}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a4c019da286d31a02dc4f4b4f304ccfe9}{eulerPathDFS}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ \mbox{\hyperlink{class_edge}{vertex}},\ \mbox{\hyperlink{class_edge}{vector<Vertex*>}}\&\ \mbox{\hyperlink{class_edge}{eulerPath}},\ \mbox{\hyperlink{class_graph}{Graph}}\ \&\mbox{\hyperlink{class_edge}{mstGraph}});}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00197\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<Vertex*>}}\ \mbox{\hyperlink{class_t_s_p_algorithms_a7aa53893af4da37dde728c2b002208ee}{findEulerPath}}(\mbox{\hyperlink{class_graph}{Graph}}\&\ \mbox{\hyperlink{class_edge}{mstGraph}});}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{class_edge}{vector<Vertex*>}}\ \mbox{\hyperlink{class_t_s_p_algorithms_ad85ae04ce7399ff2d561a968519ab1f5}{buildHamiltonianPath}}(\mbox{\hyperlink{class_edge}{vector<Vertex*>}}\ \mbox{\hyperlink{class_edge}{eulerPath}});}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00219\ \ \ \ \ \mbox{\hyperlink{class_t_s_p_algorithms_acefaa87ab90b1eba9ed417d60e934213}{TSPAlgorithms}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ graphName);}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_t_s_p_algorithms_a8dea888ab956edd46160ccf54ee6c95b}{getGraphName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph}}\ \mbox{\hyperlink{class_t_s_p_algorithms_ae49ea8cdd0f56dce7493b0a470012e64}{getGraph}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_t_s_p_algorithms_afba4fbbec08698e6172dbcd19a62a215}{isGraphFullyConnected}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_ae6a82fda7b3eac284ede9c61c65766e0}{setGraphName}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ graphName);}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_s_p_algorithms_a9c4c801c892093c4aaf15a22bf3c685a}{loadGraph}}();}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a44c33ce200e7613bb367ccd02127f597}{getMinDistWithBackTracking}}(\mbox{\hyperlink{class_edge}{stack<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a51c894c5952d85287e140e3894ceb88e}{getMinDistWithTriangularInequality}}(\mbox{\hyperlink{class_edge}{vector<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_a8878e9de5671b94c682e624467c892c2}{getMinDistWithNearestNeighbour}}(\mbox{\hyperlink{class_edge}{vector<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_t_s_p_algorithms_acd73da6e0a85f3cfa3dcc08e6b6fb89d}{getMinDistWithChristofidesAlgorithm}}(\mbox{\hyperlink{class_edge}{vector<Node>}}\&\ \mbox{\hyperlink{class_edge}{minDistPath}});}
+\DoxyCodeLine{00305\ \};}
 
 \end{DoxyCode}

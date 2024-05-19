@@ -1,0 +1,182 @@
+\doxysection{Custom\+Graph.\+h}
+\hypertarget{_custom_graph_8h_source}{}\label{_custom_graph_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ franc\ on\ 18/05/2024.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ DA2324\_P03\_STUDENT\_CUSTOMGRAPH\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ DA2324\_P03\_STUDENT\_CUSTOMGRAPH\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Node.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_vertex}{Vertex}};\ \textcolor{comment}{//\ Forward\ declaration\ of\ Vertex}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{/**********************\ Vertex\ \ ****************************/}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_edge}{Edge}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ orig,\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ dest,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ getDest()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ getWeight()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ isSelected()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ getOrig()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ getReverse()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ getFlow()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ isTraversed()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ setSelected(\textcolor{keywordtype}{bool}\ selected);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ setReverse(\mbox{\hyperlink{class_edge}{Edge}}*\ reverse);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ setFlow(\textcolor{keywordtype}{double}\ flow);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ setWeight(\textcolor{keywordtype}{double}\ weight);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ setTraversed(\textcolor{keywordtype}{bool}\ traversed);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Edge}}\&\ edge)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hash()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ dest;\ \textcolor{comment}{//\ destination\ vertex}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ weight;\ \textcolor{comment}{//\ edge\ weight,\ can\ also\ be\ used\ for\ capacity}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ auxiliary\ fields}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ selected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ used\ for\ bidirectional\ edges}}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ orig;}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ reverse\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ flow;\ \textcolor{comment}{//\ for\ flow-\/related\ problems}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//\ used\ for\ Christofides\ algorithm}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ traversed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structedge_hash}{edgeHash}}\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Edge}}*\ edge)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ edge-\/>hash();}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structedge_equality}{edgeEquality}}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Edge}}*\ e1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Edge}}*\ e2)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *e1\ ==\ *e2;}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_vertex}{Vertex}}\ \{}
+\DoxyCodeLine{00067\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}(\mbox{\hyperlink{class_node}{Node}}\ info);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}\ getInfo()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \ \ \ \ std::unordered\_set<Edge*,\ edgeHash,\ edgeEquality>\ getAdj()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ isVisited()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ isProcessing()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ getIndegree()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{double}\ getDist()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ getPath()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ \ \ \ \ std::unordered\_set<Edge*,\ edgeHash,\ edgeEquality>\ getIncoming()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ setInfo(\mbox{\hyperlink{class_node}{Node}}\ info);}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ setVisited(\textcolor{keywordtype}{bool}\ visited);}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ setProcessing(\textcolor{keywordtype}{bool}\ processing);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ setIndegree(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ indegree);}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ setDist(\textcolor{keywordtype}{double}\ dist);}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ setPath(\mbox{\hyperlink{class_edge}{Edge}}*\ path);}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ addEdge(\mbox{\hyperlink{class_vertex}{Vertex}}*\ dest,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ findEdge(\mbox{\hyperlink{class_vertex}{Vertex}}*\ dest);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ removeEdge(\mbox{\hyperlink{class_node}{Node}}\ in);}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ removeOutgoingEdges();}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vertex}{Vertex}}\&\ vertex)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hash()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{class_node}{Node}}\ info;\ \textcolor{comment}{//\ info\ node}}
+\DoxyCodeLine{00094\ \ \ \ \ std::unordered\_set<Edge*,\ edgeHash,\ edgeEquality>\ adj;\ \textcolor{comment}{//\ outgoing\ edges}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ auxiliary\ fields}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ visited\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ used\ by\ DFS,\ BFS,\ Prim\ ...}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ processing\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ used\ by\ isDAG\ (in\ addition\ to\ the\ visited\ attribute)}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ indegree;\ \textcolor{comment}{//\ used\ by\ topsort}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{double}\ dist\ =\ 0;}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ path\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ std::unordered\_set<Edge*,\ edgeHash,\ edgeEquality>\ incoming;\ \textcolor{comment}{//\ incoming\ edges}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteEdge(\mbox{\hyperlink{class_edge}{Edge}}*\ edge);}
+\DoxyCodeLine{00105\ \};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structhash_vertex}{hashVertex}}\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ vertex)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vertex-\/>hash();}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structvertex_equality}{vertexEquality}}\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ v1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ v2)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *v1\ ==\ *v2;}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{/**********************\ Edge\ \ ****************************/}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{comment}{/**********************\ Graph\ \ ****************************/}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_graph}{Graph}}\ \{}
+\DoxyCodeLine{00126\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{class_graph}{\string~Graph}}();}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ *\ Auxiliary\ function\ to\ find\ a\ vertex\ with\ a\ given\ the\ content.}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{class_vertex}{Vertex}}*\ findVertex(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ in)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ \ \ *\ \ Adds\ a\ vertex\ with\ a\ given\ content\ or\ info\ (in)\ to\ a\ graph\ (this).}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ \ *\ \ Returns\ true\ if\ successful,\ and\ false\ if\ a\ vertex\ with\ that\ content\ already\ exists.}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{bool}\ addVertex(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ in);}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{bool}\ removeVertex(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ in);}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{/*\ Auxiliary\ function\ to\ find\ a\ vertex\ with\ a\ given\ the\ content.}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge}}*\ findEdge(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ sourc,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ dest)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ \ \ *\ Adds\ an\ edge\ to\ a\ graph\ (this),\ given\ the\ contents\ of\ the\ source\ and}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ \ \ *\ destination\ vertices\ and\ the\ edge\ weight\ (w).}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \ *\ Returns\ true\ if\ successful,\ and\ false\ if\ the\ source\ or\ destination\ vertex\ does\ not\ exist.}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{bool}\ addEdge(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ sourc,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ dest,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{bool}\ removeEdge(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ source,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ dest);}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{bool}\ addBidirectionalEdge(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ sourc,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ dest,\ \textcolor{keywordtype}{double}\ w);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{int}\ getNumVertex()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00151\ \ \ \ \ std::unordered\_set<Vertex*,\ hashVertex,\ vertexEquality>\ getVertexSet()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ std::vector<Node>\ dfs()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00154\ \ \ \ \ std::vector<Node>\ dfs(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ source)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{void}\ dfsVisit(\mbox{\hyperlink{class_vertex}{Vertex}}*\ v,\ std::vector<Node>\&\ res)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00156\ \ \ \ \ std::vector<Node>\ bfs(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ source)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ isDAG()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_graph_a17cfb6090572676ff3bc1f1791ef2202}{dfsIsDAG}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ v)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00160\ \ \ \ \ std::vector<Node>\ topsort()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00163\ \ \ \ \ std::unordered\_set<Vertex*,\ hashVertex,\ vertexEquality>\ vertexSet;\ \textcolor{comment}{//\ vertex\ set}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{double}**\ distMatrix\ =\ \textcolor{keyword}{nullptr};\ \textcolor{comment}{//\ dist\ matrix\ for\ Floyd-\/Warshall}}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{int}**\ pathMatrix\ =\ \textcolor{keyword}{nullptr};\ \textcolor{comment}{//\ path\ matrix\ for\ Floyd-\/Warshall}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ *\ Finds\ the\ index\ of\ the\ vertex\ with\ a\ given\ content.}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{int}\ findVertexIdx(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_node}{Node}}\&\ in)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00172\ \};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DA2324\_P03\_STUDENT\_CUSTOMGRAPH\_H}}
+\DoxyCodeLine{00177\ }
+
+\end{DoxyCode}

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['isgraphfullyconnected_0',['isGraphFullyConnected',['../class_t_s_p_algorithms.html#afba4fbbec08698e6172dbcd19a62a215',1,'TSPAlgorithms']]]
+  ['hash_3c_20node_20_3e_0',['hash&lt; Node &gt;',['../structstd_1_1hash_3_01_node_01_4.html',1,'std']]],
+  ['hashvertex_1',['hashVertex',['../structhash_vertex.html',1,'']]]
 ];
