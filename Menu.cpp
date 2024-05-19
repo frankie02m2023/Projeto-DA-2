@@ -362,18 +362,22 @@ void Menu::algorithmMenu(TSPAlgorithms tspAlgorithm) {
         cout << " Solve TSP with Christofides Algorithm                         ";
         cout << "******\n";
 
-        cout << "******";
-        cout << " 4. Back                                                          ";
+        cout << "****** 4.";
+        cout << " Solve TSP for not fully connected graphs                      ";
         cout << "******\n";
 
         cout << "******";
-        cout << " 5. Exit                                                          ";
+        cout << " 5. Back                                                          ";
+        cout << "******\n";
+
+        cout << "******";
+        cout << " 6. Exit                                                          ";
         cout << "******\n";
 
         cout << "******************************************************************************\n";
         cout << "\nEnter your choice: ";
         cin >> choice;
-        if (choice == 5) { break; }
+        if (choice == 6) { break; }
         handleAlgorithmMenu(choice, tspAlgorithm);
         break;
     }
@@ -425,10 +429,28 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 cout << "Christofides execution time: " << duration.count() << " seconds" << endl;
             }
                 break;
-            case 4:
+            case 4: {
+                vector<Node> minPath;
+                auto start = chrono::high_resolution_clock::now();
+                double minPathDistance = tspAlgorithm.getMinDistWithNearestNeighbour(minPath);
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> duration = end - start;
+                if(minPath.size() < tspAlgorithm.getGraph().getVertexSet().size()){
+                    cout << "No path was found!" << endl;
+                    break;
+                }
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
+                for(Node node : minPath){
+                    cout << node.getID() << " -> ";
+                }
+                cout << "END" << endl;
+                cout << "Nearest Neighbour execution time: " << duration.count() << " seconds" << endl;
+            }
+                break;
+            case 5:
                 cout << "Going back to Graph Selection..." << endl;
                 graphMenu();
-            case 5:
+            case 6:
                 cout << "Exiting..." << endl;
                 exit(0);  // Exit the program
             default:

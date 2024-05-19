@@ -448,40 +448,6 @@ double TSPAlgorithms::getMinDistWithTriangularInequality(vector<Node> &minDistPa
     return minDistance;
 }
 
-double TSPAlgorithms::getNearestNeighbourDist(Vertex *vertex) {
-    double minDist = INT_MAX;
-    Vertex* selectedNode = nullptr;
-    for(Edge* edge : vertex->getAdj()){
-        if(!edge->getDest()->isVisited() && edge->getWeight() < minDist){
-            minDist = edge->getWeight();
-            selectedNode = edge->getDest();
-        }
-    }
-    vertex = selectedNode;
-    return minDist;
-}
-
-double TSPAlgorithms::getMinDistWithNearestNeighbourAnd2opt(vector<Node> &minDistPath) {
-    setAllVertexesAsUnvisited();
-    double minDist = 0;
-    Node root = Node(0);
-    Vertex* rootVertex = graph.findVertex(0);
-    minDistPath.push_back(root);
-    Vertex* currentVertex = rootVertex;
-    currentVertex->setVisited(true);
-    while(minDistPath.size() < graph.getVertexSet().size()){
-        minDist+= getNearestNeighbourDist(currentVertex);
-        currentVertex->setVisited(true);
-        minDistPath.push_back(currentVertex->getInfo());
-    }
-    for(Edge* edge : currentVertex->getAdj()){
-        if(edge->getDest()->getInfo() == root){
-            minDist += edge->getWeight();
-        }
-    }
-    return minDist;
-}
-
 double TSPAlgorithms::findOrCalculateDistanceBetweenVertexes(Vertex *v1, Vertex *v2) {
     Vertex* v1Graph = graph.findVertex(v1->getInfo());
     Vertex* v2Graph = graph.findVertex(v2->getInfo());
@@ -696,6 +662,47 @@ double TSPAlgorithms::getMinDistWithChristofidesAlgorithm(vector<Node> &minDistP
     }
     minDistPath.push_back(hamiltonianPath[hamiltonianPath.size() - 1]->getInfo());
     return minDistance;
+}
+
+double TSPAlgorithms::getNearestNeighbourDist(Vertex *vertex, Node &selectedNode, bool& foundNewEdges) {
+    double minDist = INT_MAX;
+    for(Edge* edge : vertex->getAdj()){
+        if(!edge->getDest()->isVisited() && edge->getWeight() < minDist){
+            minDist = edge->getWeight();
+            selectedNode = edge->getDest()->getInfo();
+            foundNewEdges = true;
+        }
+    }
+    return minDist;
+}
+
+double TSPAlgorithms::getMinDistWithNearestNeighbour(vector<Node> &minDistPath) {
+    setAllVertexesAsUnvisited();
+    double minDist = 0;
+    Node root = Node(0);
+    Node selectedNode = root;
+    bool foundNewEdges = false;
+    Vertex* rootVertex = graph.findVertex(0);
+    minDistPath.push_back(root);
+    Vertex* currentVertex = rootVertex;
+    currentVertex->setVisited(true);
+    while(minDistPath.size() < graph.getVertexSet().size()){
+        minDist+= getNearestNeighbourDist(currentVertex,selectedNode, foundNewEdges);
+        if(!foundNewEdges){
+            break;
+        }
+        currentVertex = graph.findVertex(selectedNode);
+        currentVertex->setVisited(true);
+        minDistPath.push_back(currentVertex->getInfo());
+        foundNewEdges = false;
+    }
+    for(Edge* edge : currentVertex->getAdj()){
+        if(edge->getDest()->getInfo() == root){
+            minDist += edge->getWeight();
+            minDistPath.push_back(edge->getDest()->getInfo());
+        }
+    }
+    return minDist;
 }
 
 

@@ -100,7 +100,8 @@ private:
      *
      * Complexity: O(V) where V is the number of vertices.
      */
-    double getNearestNeighbourDist(Vertex* vertex);
+    double getNearestNeighbourDist(Vertex* vertex, Node& selectedNode, bool& foundNewEdges);
+
 
     /**
      * @brief Finds or calculates the distance between two vertices.
@@ -292,7 +293,7 @@ public:
      *
      * Complexity: O(V^2) where V is the number of vertices.
      */
-    double getMinDistWithNearestNeighbourAnd2opt(vector<Node>& minDistPath);
+    double getMinDistWithNearestNeighbour(vector<Node>& minDistPath);
 
     /**
      * @brief Finds the minimum distance using the Christofides algorithm.
