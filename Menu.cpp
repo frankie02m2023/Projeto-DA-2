@@ -392,13 +392,13 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 double minPathDistance = tspAlgorithm.getMinDistWithBackTracking(minPath);
                 auto end = chrono::high_resolution_clock::now();
                 chrono::duration<double> duration = end - start;
-                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 while (!minPath.empty()) {
                     cout << minPath.top().getID() << " -> ";
                     minPath.pop();
                 }
                 cout << "END" << endl;
-                std::cout << "Backtracking execution time: " << duration.count() << " seconds" << std::endl;
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
+                cout << "Backtracking execution time: " << duration.count() << " seconds" << std::endl;
             }
                 break;
             case 2: {
@@ -407,11 +407,11 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 double minPathDistance = tspAlgorithm.getMinDistWithTriangularInequality(minPath);
                 auto end = chrono::high_resolution_clock::now();
                 chrono::duration<double> duration = end - start;
-                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
                 cout << "END" << endl;
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 cout << "Triangular inequality execution time: " << duration.count() << " seconds" << endl;
             }
                 break;
@@ -421,11 +421,11 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                 double minPathDistance = tspAlgorithm.getMinDistWithChristofidesAlgorithm(minPath);
                 auto end = chrono::high_resolution_clock::now();
                 chrono::duration<double> duration = end - start;
-                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
                 cout << "END" << endl;
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 cout << "Christofides execution time: " << duration.count() << " seconds" << endl;
             }
                 break;
@@ -439,11 +439,11 @@ void Menu::handleAlgorithmMenu(int choice, TSPAlgorithms tspAlgorithm) {
                     cout << "No path was found!" << endl;
                     break;
                 }
-                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 for(Node node : minPath){
                     cout << node.getID() << " -> ";
                 }
                 cout << "END" << endl;
+                cout << "Minimum Path Distance: " << minPathDistance << endl;
                 cout << "Nearest Neighbour execution time: " << duration.count() << " seconds" << endl;
             }
                 break;

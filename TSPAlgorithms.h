@@ -47,8 +47,6 @@ private:
      */
     void setAllVertexPathsNull();
 
-    void resetGraph();
-
 
     /**
      * @brief Recursive function to perform DFS for the backtracking algorithm.
@@ -78,7 +76,7 @@ private:
      *
      * @param root The root vertex.
      *
-     * Complexity: O(V^2) where V is the number of vertices.
+     * Complexity: O(E * logV) where V is the number of vertices and E is the number of edges.
      */
     void primAlgorithm(Vertex* root);
 
@@ -120,7 +118,7 @@ private:
      * @param mstGraph The MST graph to be created.
      * @param root The root vertex.
      *
-     * Complexity: O(V^2) where V is the number of vertices.
+     * Complexity: O(E * logV) where V is the number of vertices and E is the number of edges.
      */
     void primAlgorithmChristofides(Graph& mstGraph, Vertex* vertex);
 
@@ -184,7 +182,7 @@ private:
      * @param eulerPath The vector to store the Eulerian path.
      * @param mstGraph The MST graph.
      *
-     * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
+     * Complexity: O((V + E)^2) where V is the number of vertices and E is the number of edges.
      */
     void eulerPathDFS(Vertex* vertex, vector<Vertex*>& eulerPath, Graph &mstGraph);
 
@@ -194,7 +192,7 @@ private:
      * @param mstGraph The MST graph.
      * @return The vector of vertices representing the Eulerian path.
      *
-     * Complexity: O(V + E) where V is the number of vertices and E is the number of edges.
+     * Complexity: O((V + E)^2) where V is the number of vertices and E is the number of edges.
      */
     vector<Vertex*> findEulerPath(Graph& mstGraph);
 
