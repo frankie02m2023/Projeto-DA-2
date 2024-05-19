@@ -16,7 +16,7 @@ Edge *Vertex::findEdge(Vertex *dest) {
     Edge edge(this,dest,0);
     Edge* edge1 = &edge;
     auto it = adj.find(edge1);
-    if(it == nullptr){
+    if(it == adj.end()){
         return nullptr;
     }
     return *it;
@@ -211,7 +211,7 @@ Vertex * Graph::findVertex(const Node &in) const {
     Vertex vertex(in);
     Vertex* vertex1 = &vertex;
     auto it = vertexSet.find(vertex1);
-    if(it == nullptr){
+    if(it == vertexSet.end()){
         return nullptr;
     }
     return *it;
@@ -226,7 +226,7 @@ int Graph::findVertexIdx(const Node &in) const {
     Vertex* vertex1 = &vertex;
     auto it = vertexSet.find(vertex1);
     Vertex *vertex2 = *it;
-    if(it == nullptr){
+    if(it == vertexSet.end()){
         return -1;
     }
     return vertex2->getInfo().getID();
