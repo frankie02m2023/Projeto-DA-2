@@ -17,7 +17,6 @@ add_executable(Projeto-DA
         Node.cpp
         TSPAlgorithms.h
         TSPAlgorithms.cpp
-        MutablePriorityQueue.h
         Menu.h
         Menu.cpp
 )

@@ -6,7 +6,6 @@
 #include <sstream>
 #include <iostream>
 #include "TSPAlgorithms.h"
-#include "MutablePriorityQueue.h"
 
 Graph TSPAlgorithms::getGraph() const {
     return graph;
@@ -269,8 +268,7 @@ void TSPAlgorithms::loadGraphEdges(unsigned int& numberOfGraphEdges) {
             Node destinationNode = Node(idDestination);
 
             numberOfGraphEdges+=2;
-            graph.addEdge(sourceNode,destinationNode,distance);
-            graph.addEdge(destinationNode, sourceNode, distance);
+            graph.addBidirectionalEdge(sourceNode,destinationNode,distance);
         }
     }
 }
@@ -485,17 +483,16 @@ double TSPAlgorithms::getMinDistWithNearestNeighbourAnd2opt(vector<Node> &minDis
 }
 
 double TSPAlgorithms::findOrCalculateDistanceBetweenVertexes(Vertex *v1, Vertex *v2) {
-    Vertex* firstVertex = graph.findVertex(v1->getInfo());
-    for(Edge* edge : firstVertex->getAdj()){
-        if(edge->getDest()->getInfo() == v2->getInfo()){
-            return edge->getWeight();
+    Vertex* v1Graph = graph.findVertex(v1->getInfo());
+    Vertex* v2Graph = graph.findVertex(v2->getInfo());
+    if(v1Graph->findEdge(v2Graph) == nullptr){
+        Location defaultLocation = Location(INT_MIN, INT_MIN);
+        if(v1->getInfo().getLocation() != defaultLocation && v2->getInfo().getLocation() != defaultLocation){
+            return v1->getInfo().getLocation().getHaversineDistance(v2->getInfo().getLocation());
         }
+        return 0;
     }
-    Location defaultLocation = Location(INT_MIN, INT_MIN);
-    if(v1->getInfo().getLocation() != defaultLocation && v2->getInfo().getLocation() != defaultLocation){
-        return v1->getInfo().getLocation().getHaversineDistance(v2->getInfo().getLocation());
-    }
-    return 0;
+    return v1Graph->findEdge(v2Graph)->getWeight();
 }
 
 void TSPAlgorithms::primAlgorithmChristofides(Graph& mstGraph, Vertex *root) {
@@ -533,8 +530,7 @@ void TSPAlgorithms::primAlgorithmChristofides(Graph& mstGraph, Vertex *root) {
     for (Vertex* vertex : vertexes) {
         Edge* pathEdge = vertex->getPath();
         if (pathEdge != nullptr) {
-            mstGraph.addEdge(pathEdge->getOrig()->getInfo(), pathEdge->getDest()->getInfo(), pathEdge->getWeight());
-            mstGraph.addEdge(pathEdge->getDest()->getInfo(), pathEdge->getOrig()->getInfo(), pathEdge->getWeight());
+            mstGraph.addBidirectionalEdge(pathEdge->getOrig()->getInfo(), pathEdge->getDest()->getInfo(), pathEdge->getWeight());
         }
     }
 }
@@ -586,27 +582,8 @@ void TSPAlgorithms::findPerfectMatching(Graph& mstGraph, vector<Vertex*> oddDegr
             vertexesWithEvenDegree.push_back(oddDegreeVertexes[pairedVertexIndex]);
             paired[i] = true;
             paired[pairedVertexIndex] = true;
-            mstGraph.addEdge(oddDegreeVertexes[i]->getInfo(), oddDegreeVertexes[pairedVertexIndex]->getInfo(),minDistance);
-            mstGraph.addEdge(oddDegreeVertexes[pairedVertexIndex]->getInfo(), oddDegreeVertexes[i]->getInfo(),minDistance);
+            mstGraph.addBidirectionalEdge(oddDegreeVertexes[i]->getInfo(), oddDegreeVertexes[pairedVertexIndex]->getInfo(),minDistance);
             minDistance = INT_MAX;
-        }
-    }
-}
-
-void TSPAlgorithms::setReverseEdgeAsTraversed(Edge *edge) {
-    Vertex* reverseEdgeOrigin = edge->getDest();
-    for(Edge* reverseEdge : reverseEdgeOrigin->getAdj()){
-        if(reverseEdge->getDest()->getInfo() == edge->getOrig()->getInfo()){
-            reverseEdge->setTraversed(true);
-        }
-    }
-}
-
-void TSPAlgorithms::setReverseEdgeAsUnTraversed(Edge *edge) {
-    Vertex* reverseEdgeOrigin = edge->getDest();
-    for(Edge* reverseEdge : reverseEdgeOrigin->getAdj()){
-        if(reverseEdge->getDest()->getInfo() == edge->getOrig()->getInfo()){
-            reverseEdge->setTraversed(false);
         }
     }
 }
@@ -642,10 +619,10 @@ bool TSPAlgorithms::edgeIsBridge(Edge *edge, Graph &mstGraph) {
         vertex->setVisited(false);
     }
     edge->setTraversed(true);
-    setReverseEdgeAsTraversed(edge);
+    edge->getReverse()->setTraversed(true);
     dfsEdgeIsBridge(startNode,numberOfReachableVertexesWithoutEdge);
     edge->setTraversed(false);
-    setReverseEdgeAsUnTraversed(edge);
+    edge->getReverse()->setTraversed(false);
     return numberOfReachableVertexesWithEdge > numberOfReachableVertexesWithoutEdge;
 }
 
@@ -654,7 +631,7 @@ void TSPAlgorithms::eulerPathDFS(Vertex *vertex, vector<Vertex*> &eulerPath, Gra
         if(!edge->isTraversed()){
             if(!edgeIsBridge(edge,mstGraph)){
                 edge->setTraversed(true);
-                setReverseEdgeAsTraversed(edge);
+                edge->getReverse()->setTraversed(true);
                 eulerPath.push_back(edge->getDest());
                 eulerPathDFS(edge->getDest(),eulerPath,mstGraph);
             }
@@ -673,7 +650,6 @@ vector<Vertex *> TSPAlgorithms::findEulerPath(Graph &mstGraph) {
         }
     }
     rootVertex->setVisited(true);
-    unordered_set<Edge*> edges = rootVertex->getAdj();
     eulerPath.push_back(rootVertex);
     eulerPathDFS(rootVertex,eulerPath,mstGraph);
     return eulerPath;

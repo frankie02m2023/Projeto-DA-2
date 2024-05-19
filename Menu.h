@@ -6,6 +6,7 @@
 #define PROJETO_DA_2_MENU_H
 
 #include "TSPAlgorithms.h"
+#include <chrono>
 
 class Menu {
     public:

@@ -12,6 +12,16 @@ Edge* Vertex::addEdge(Vertex* d, double w) {
     return newEdge;
 }
 
+Edge *Vertex::findEdge(Vertex *dest) {
+    Edge edge(this,dest,0);
+    Edge* edge1 = &edge;
+    auto it = adj.find(edge1);
+    if(it == nullptr){
+        return nullptr;
+    }
+    return *it;
+}
+
 bool Vertex::removeEdge(Node in) {
     bool removedEdge = false;
     auto it = adj.begin();
@@ -43,7 +53,7 @@ Node Vertex::getInfo() const {
     return this->info;
 }
 
-std::unordered_set<Edge*, std::hash<Edge*>, std::equal_to<Edge*>> Vertex::getAdj() const {
+std::unordered_set<Edge*, edgeHash, edgeEquality> Vertex::getAdj() const {
     return this->adj;
 }
 
@@ -67,7 +77,7 @@ Edge* Vertex::getPath() const {
     return this->path;
 }
 
-std::unordered_set<Edge*, std::hash<Edge*>, std::equal_to<Edge*>> Vertex::getIncoming() const {
+std::unordered_set<Edge*, edgeHash, edgeEquality> Vertex::getIncoming() const {
     return this->incoming;
 }
 
@@ -172,14 +182,14 @@ void Edge::setTraversed(bool traversed) {
 }
 
 bool Edge::operator==(const Edge &edge) const {
-    return this->orig == edge.orig && this->dest == edge.dest && this->weight == edge.weight;
+    return this->orig == edge.orig && this->dest == edge.dest;
 }
 
 size_t Edge::hash() const {
     size_t origHash = std::hash<Vertex*>()(orig);
     size_t destHash = std::hash<Vertex*>()(dest);
     size_t weightHash = std::hash<double>()(weight);
-    return (origHash ^ destHash ^ weightHash) << 1;
+    return (origHash >> 1 ^ destHash >> 1) >> 1;
 }
 
 
